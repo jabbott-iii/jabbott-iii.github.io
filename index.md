@@ -5,7 +5,7 @@ title: Home
 
 # Welcome
 
-This is my GitHub Pages blog powered by Jekyll and the **Midnight** theme.
+This is my GitHub Pages blog powered by Jekyll.
 
 ## Latest Posts
 
