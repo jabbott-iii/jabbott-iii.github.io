@@ -1,7 +1,14 @@
 title: Jabbott III Blog
 description: GitHub Pages Blog
+tagline: Notes on software, projects, and learning
+author: Joseph Abbott III
 url: "https://jabbott-iii.github.io"
 theme: jekyll-theme-midnight
 markdown: kramdown
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
+paginate: 5
+paginate_path: "/page:num/"
+social_links:
+  github: jabbott-iii
