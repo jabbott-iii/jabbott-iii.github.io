@@ -1,0 +1,7 @@
+title: Jabbott III Blog
+description: GitHub Pages Blog
+url: "https://jabbott-iii.github.io"
+theme: jekyll-theme-midnight
+markdown: kramdown
+plugins:
+  - jekyll-feed
