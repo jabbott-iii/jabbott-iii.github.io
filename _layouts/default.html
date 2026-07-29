@@ -44,6 +44,10 @@
 
         {{ content }}
 
+        {% unless page.url == "/" %}
+        <p><a href="{{ '/' | relative_url }}">← Back to home</a></p>
+        {% endunless %}
+
       </section>
 
     </div>
