@@ -3,9 +3,9 @@ layout: default
 title: Home
 ---
 
-# Welcome
+# Welcome!
 
-This is my GitHub Pages blog powered by Jekyll.
+I am a United States Marine Corps veteran who went into IT before Software Engineering. My dream is to work on machine learning and robotics programs. 
 
 ## Latest Posts
 
