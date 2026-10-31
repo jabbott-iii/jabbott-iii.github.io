@@ -10,14 +10,14 @@
   name: Cryptare
   repo: https://github.com/jabbott-iii/Cryptare
   language: Go
-  status: Active
+  status: Production maintenance
   summary: File encryption and compression TUI/CLI using AES-256-GCM and Argon2id, with a password-protected key store and signed releases.
 
 - slug: salus
   name: Salus
   repo: https://github.com/jabbott-iii/Salus
   language: Go
-  status: Active
+  status: Production maintenance
   summary: Environment health checker for disk, memory, CPU, Docker, Kubernetes, services, certificates and misconfigurations with PASS/WARN/FAIL reporting.
 
 - slug: denarii-dolor
