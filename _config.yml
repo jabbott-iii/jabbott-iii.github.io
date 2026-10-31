@@ -2,7 +2,7 @@ title: Joseph Abbott III
 tagline: Software Engineer & Marine Veteran
 description: >-
   Engineering log of Joseph Abbott III, software engineer and U.S. Marine Corps
-  veteran: release notes and project updates for Munus, Cryptare, Salus and Denarii Dolor.
+  veteran: release notes and project updates.
 lang: en-US
 locale: en_US
 url: "https://jabbott.dev"
@@ -24,12 +24,6 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-
-plugins:
-  - jekyll-feed
-
-feed:
-  path: feed.xml
 
 defaults:
   - scope:

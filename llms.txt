@@ -51,6 +51,5 @@ Newest first:
 ## Optional
 
 - [Full text of every post]({{ '/llms-full.txt' | absolute_url }})
-- [RSS feed]({{ '/feed.xml' | absolute_url }})
 - [Sitemap]({{ '/sitemap.xml' | absolute_url }})
 - [Site source](https://github.com/{{ site.social.github }}/{{ site.social.github }}.github.io)

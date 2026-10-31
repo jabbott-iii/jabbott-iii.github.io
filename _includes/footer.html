@@ -17,15 +17,6 @@
             <li><a href="{{ '/' | relative_url }}">Engineering log</a></li>
             <li><a href="{{ '/resume/' | relative_url }}">Resume</a></li>
             <li><a href="{{ '/deployments/' | relative_url }}">Deployments</a></li>
-            <li><a href="{{ '/feed.xml' | relative_url }}">RSS feed</a></li>
-          </ul>
-        </div>
-        <div>
-          <p class="footer-title">Projects</p>
-          <ul class="footer-links">
-            {%- for p in site.data.projects limit: 5 %}
-            <li><a href="{{ p.repo }}" rel="noopener">{{ p.name }}</a></li>
-            {%- endfor %}
           </ul>
         </div>
         <div>

@@ -55,7 +55,6 @@ body_class: home
     <section class="feed" aria-labelledby="feed-title">
       <div class="section-head">
         <h2 class="section-title" id="feed-title">Latest transmissions</h2>
-        <a class="btn btn--slate btn--sm" href="{{ '/feed.xml' | relative_url }}">{% include icon.html name="rss" %}<span>RSS feed</span></a>
       </div>
       <div class="card-grid" data-cards>
         {%- for post in site.posts %}

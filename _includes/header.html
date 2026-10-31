@@ -15,7 +15,10 @@
       </button>
 
       <nav class="site-nav" id="site-nav" aria-label="Primary">
-        <a class="nav-link{% if page.url == '/' or page.collection == 'posts' %} is-current{% endif %}" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Log</a>
+        <a class="btn btn--amber{% if page.url == '/' or page.collection == 'posts' %} is-current{% endif %}" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>
+          {% include icon.html name="log" %}
+          <span>Log</span>
+        </a>
 
         <div class="deploy" data-deploy>
           <a class="btn btn--ghost deploy__toggle{% if page.url == '/deployments/' %} is-current{% endif %}" href="{{ '/deployments/' | relative_url }}" aria-controls="deploy-panel" data-deploy-toggle>

@@ -3,7 +3,7 @@
   <div class="dossier__top">
     <span class="hex-avatar"><img src="{{ site.avatar }}&amp;s=160" alt="Portrait of {{ r.name }}" width="72" height="72" loading="lazy"></span>
     <div>
-      <p class="kicker kicker--sm">Pilot dossier</p>
+      <p class="kicker kicker--sm">Dossier</p>
       <h2 class="dossier__name" id="dossier-title">{{ r.name }}</h2>
     </div>
   </div>
@@ -16,6 +16,5 @@
   <ul class="dossier__links">
     <li><a href="https://www.linkedin.com/in/{{ site.social.linkedin }}/" rel="me noopener">{% include icon.html name="linkedin" %}<span class="sr-only">LinkedIn</span></a></li>
     <li><a href="https://x.com/{{ site.social.x }}" rel="me noopener">{% include icon.html name="x" %}<span class="sr-only">X</span></a></li>
-    <li><a href="{{ '/feed.xml' | relative_url }}">{% include icon.html name="rss" %}<span class="sr-only">RSS feed</span></a></li>
   </ul>
 </section>
