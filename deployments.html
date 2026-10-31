@@ -1,0 +1,38 @@
+---
+layout: default
+title: Deployments
+description: Live sites deployed from Joseph Abbott III's GitHub repositories and served from jabbott.dev, with links to each site and its source repository.
+permalink: /deployments/
+---
+<div class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{{ '/' | relative_url }}">Log</a></li>
+      <li aria-current="page">Deployments</li>
+    </ol>
+  </nav>
+
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Fleet status</p>
+      <h1 class="section-title section-title--xl">Deployments</h1>
+    </div>
+    <p class="page-head__lede">Sites built and served straight from GitHub repositories. This page also asks GitHub for any repository with Pages switched on, so new deployments appear here as soon as they go live.</p>
+  </header>
+
+  <div class="deploy-grid" data-deploy-grid>
+    {%- for d in site.data.deployments %}
+    <article class="deploy-card panel panel--brackets" data-deploy-repo="{{ d.repo | downcase }}">
+      <p class="kicker"><span class="status-dot" aria-hidden="true"></span> Online <span class="kicker__sep">//</span> {{ d.language | default: 'Web' }}</p>
+      <h2 class="deploy-card__title">{{ d.name }}</h2>
+      <p class="deploy-card__url">{{ d.url | remove: 'https://' | remove: 'http://' }}</p>
+      <p class="deploy-card__text">{{ d.summary }}</p>
+      <div class="btn-row">
+        <a class="btn btn--amber btn--sm" href="{{ d.url }}" target="_blank" rel="noopener">{% include icon.html name="external" %}<span>Launch</span></a>
+        <a class="btn btn--ghost btn--sm" href="https://github.com/{{ d.repo }}" target="_blank" rel="noopener">{% include icon.html name="github" %}<span>Repository</span></a>
+      </div>
+    </article>
+    {%- endfor %}
+  </div>
+  <p class="deploy__status deploy__status--page" data-deploy-status hidden></p>
+</div>

@@ -1,0 +1,87 @@
+---
+layout: default
+---
+{%- assign project = site.data.projects | where: 'slug', page.project | first -%}
+{%- assign words = content | strip_html | number_of_words -%}
+{%- assign minutes = words | divided_by: 220 | plus: 1 -%}
+<div class="read-progress" aria-hidden="true"><span data-progress></span></div>
+<div class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{{ '/' | relative_url }}">Log</a></li>
+      {%- if project %}
+      <li><a href="{{ '/' | relative_url }}?project={{ project.slug }}">{{ project.name }}</a></li>
+      {%- endif %}
+      <li aria-current="page">{{ page.title }}</li>
+    </ol>
+  </nav>
+
+  <div class="layout">
+    <article class="article">
+      <header class="article__header panel panel--brackets">
+        <p class="kicker">{{ project.name | default: 'Log' }} <span class="kicker__sep">//</span> {{ page.kind | default: 'Entry' }}</p>
+        <h1 class="article__title">{{ page.title }}</h1>
+        {%- if page.description %}
+        <p class="article__dek">{{ page.description }}</p>
+        {%- endif %}
+        <div class="meta-row">
+          <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%Y-%m-%d' }}</time>
+          <span>By <a href="{{ '/resume/' | relative_url }}" rel="author">{{ site.author.name }}</a></span>
+          <span>{{ minutes }} min read</span>
+        </div>
+      </header>
+
+      <div class="article__body panel prose">
+{{ content | replace: '<h1', '<h2 class="prose__lead"' | replace: '</h1>', '</h2>' }}
+      </div>
+
+      <nav class="pager" aria-label="More posts">
+        {%- if page.previous %}
+        <a class="pager__link pager__link--prev" href="{{ page.previous.url | relative_url }}" rel="prev">
+          <small>{% include icon.html name="arrow-left" %} Older</small>
+          <span>{{ page.previous.title }}</span>
+        </a>
+        {%- else %}
+        <span class="pager__link pager__link--empty"></span>
+        {%- endif %}
+        {%- if page.next %}
+        <a class="pager__link pager__link--next" href="{{ page.next.url | relative_url }}" rel="next">
+          <small>Newer {% include icon.html name="arrow" %}</small>
+          <span>{{ page.next.title }}</span>
+        </a>
+        {%- endif %}
+      </nav>
+    </article>
+
+    <aside class="sidebar" aria-label="Related">
+      {%- if project %}
+      <section class="side-panel panel" aria-labelledby="project-title">
+        <h2 class="side-panel__title" id="project-title">Project</h2>
+        <p class="project-name">{{ project.name }}</p>
+        <dl class="spec">
+          <div><dt>Language</dt><dd>{{ project.language }}</dd></div>
+          <div><dt>Status</dt><dd>{{ project.status }}</dd></div>
+        </dl>
+        <p class="side-panel__text">{{ project.summary }}</p>
+        <a class="btn btn--teal btn--sm btn--block" href="{{ project.repo }}" rel="noopener" target="_blank">{% include icon.html name="github" %}<span>View repository</span></a>
+      </section>
+      {%- endif %}
+
+      <section class="side-panel panel" aria-labelledby="latest-title">
+        <h2 class="side-panel__title" id="latest-title">Latest transmissions</h2>
+        <ul class="list-rows">
+          {%- assign shown = 0 -%}
+          {%- for post in site.posts -%}
+            {%- if post.url == page.url or shown >= 5 -%}{%- continue -%}{%- endif -%}
+            {%- assign shown = shown | plus: 1 -%}
+            {%- assign lp = site.data.projects | where: 'slug', post.project | first %}
+          <li><a href="{{ post.url | relative_url }}">{{ post.title }}<small>{{ post.date | date: '%Y-%m-%d' }} · {{ lp.name | default: 'Log' }}</small></a></li>
+          {%- endfor %}
+        </ul>
+        <a class="link-arrow link-arrow--sm" href="{{ '/' | relative_url }}">Full log {% include icon.html name="arrow" %}</a>
+      </section>
+
+      {% include dossier.html %}
+    </aside>
+  </div>
+</div>

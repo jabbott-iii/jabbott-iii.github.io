@@ -1,0 +1,46 @@
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="{{ '/' | relative_url }}">
+            {% include icon.html name="mark" class="brand__mark" %}
+            <span class="brand__text">
+              <span class="brand__name">JABBOTT<span class="brand__tld">.DEV</span></span>
+              <span class="brand__sub">Engineering Log</span>
+            </span>
+          </a>
+          <p>{{ site.description }}</p>
+        </div>
+        <div>
+          <p class="footer-title">Navigate</p>
+          <ul class="footer-links">
+            <li><a href="{{ '/' | relative_url }}">Engineering log</a></li>
+            <li><a href="{{ '/resume/' | relative_url }}">Resume</a></li>
+            <li><a href="{{ '/deployments/' | relative_url }}">Deployments</a></li>
+            <li><a href="{{ '/feed.xml' | relative_url }}">RSS feed</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-title">Projects</p>
+          <ul class="footer-links">
+            {%- for p in site.data.projects limit: 5 %}
+            <li><a href="{{ p.repo }}" rel="noopener">{{ p.name }}</a></li>
+            {%- endfor %}
+          </ul>
+        </div>
+        <div>
+          <p class="footer-title">Elsewhere</p>
+          <ul class="footer-links">
+            <li><a href="https://github.com/{{ site.social.github }}" rel="me noopener">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/{{ site.social.linkedin }}/" rel="me noopener">LinkedIn</a></li>
+            <li><a href="https://x.com/{{ site.social.x }}" rel="me noopener">X</a></li>
+            <li><a href="{{ '/llms.txt' | relative_url }}">llms.txt</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-base">
+        <span>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}</span>
+        <span>Built by hand with Jekyll on GitHub Pages</span>
+      </div>
+    </div>
+  </footer>

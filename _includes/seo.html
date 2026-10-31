@@ -1,0 +1,200 @@
+{%- comment -%}
+  Search (SEO) and answer-engine (GEO) metadata: title, description, canonical URL, Open Graph,
+  Twitter card and one JSON-LD graph that describes the site, its author and the current page.
+{%- endcomment -%}
+{%- assign r = site.data.resume -%}
+{%- assign seo_base = site.url | append: site.baseurl -%}
+{%- assign seo_is_post = false -%}
+{%- if page.collection == 'posts' -%}{%- assign seo_is_post = true -%}{%- endif -%}
+{%- assign seo_project = site.data.projects | where: 'slug', page.project | first -%}
+{%- if page.url == '/' -%}
+  {%- capture seo_title -%}{{ site.title }} — {{ site.tagline }}{%- endcapture -%}
+{%- else -%}
+  {%- capture seo_title -%}{{ page.title }} | {{ site.title }}{%- endcapture -%}
+{%- endif -%}
+{%- assign seo_desc = page.description | default: site.description | strip_html | normalize_whitespace | strip -%}
+{%- assign seo_url = page.url | replace: '/index.html', '/' | absolute_url -%}
+{%- assign seo_image = page.image -%}
+{%- if seo_image == nil and seo_is_post -%}
+  {%- assign seo_scan = content | split: '<aside' | first -%}
+  {%- if seo_scan contains '<img' -%}
+    {%- assign seo_parts = seo_scan | split: '<img' -%}
+    {%- assign seo_src = seo_parts[1] | split: 'src="' -%}
+    {%- assign seo_image = seo_src[1] | split: '"' | first -%}
+  {%- endif -%}
+{%- endif -%}
+{%- assign seo_has_image = true -%}
+{%- if seo_image == nil -%}{%- assign seo_has_image = false -%}{%- assign seo_image = site.avatar -%}{%- endif -%}
+{%- assign seo_knows = '' | split: '' -%}
+{%- for g in r.skills -%}{%- for s in g.items -%}
+  {%- unless s contains 'Clearance' -%}{%- assign seo_knows = seo_knows | push: s -%}{%- endunless -%}
+{%- endfor -%}{%- endfor -%}
+{%- assign seo_published = page.date | date_to_xmlschema -%}
+{%- assign seo_modified = page.last_modified_at | default: page.date | date_to_xmlschema -%}
+  <title>{{ seo_title | strip_html | strip }}</title>
+  <meta name="description" content="{{ seo_desc | escape }}">
+  <meta name="author" content="{{ site.author.name }}">
+  <meta name="robots" content="{% if page.sitemap == false %}noindex, follow{% else %}index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1{% endif %}">
+  <link rel="canonical" href="{{ seo_url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }} — Engineering Log" href="{{ '/feed.xml' | absolute_url }}">
+  <link rel="author" href="{{ '/resume/' | absolute_url }}">
+  <link rel="me" href="https://github.com/{{ site.social.github }}">
+  <link rel="me" href="https://www.linkedin.com/in/{{ site.social.linkedin }}/">
+  <link rel="me" href="https://x.com/{{ site.social.x }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:locale" content="{{ site.locale | default: 'en_US' }}">
+  <meta property="og:type" content="{% if seo_is_post %}article{% elsif page.url == '/resume/' %}profile{% else %}website{% endif %}">
+  <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+  <meta property="og:description" content="{{ seo_desc | escape }}">
+  <meta property="og:url" content="{{ seo_url }}">
+  <meta property="og:image" content="{{ seo_image }}">
+  <meta property="og:image:alt" content="{{ page.title | default: site.title | escape }}">
+{%- if seo_is_post %}
+  <meta property="article:published_time" content="{{ seo_published }}">
+  <meta property="article:modified_time" content="{{ seo_modified }}">
+  <meta property="article:author" content="{{ site.author.url }}">
+  {%- if seo_project %}
+  <meta property="article:section" content="{{ seo_project.name }}">
+  {%- endif %}
+  {%- if page.kind %}
+  <meta property="article:tag" content="{{ page.kind }}">
+  {%- endif %}
+{%- endif %}
+{%- if page.url == '/resume/' %}
+  <meta property="profile:first_name" content="Joseph">
+  <meta property="profile:last_name" content="Abbott III">
+{%- endif %}
+  <meta name="twitter:card" content="{% if seo_has_image %}summary_large_image{% else %}summary{% endif %}">
+  <meta name="twitter:site" content="@{{ site.social.x }}">
+  <meta name="twitter:creator" content="@{{ site.social.x }}">
+  <meta name="twitter:title" content="{{ page.title | default: site.title | escape }}">
+  <meta name="twitter:description" content="{{ seo_desc | escape }}">
+  <meta name="twitter:image" content="{{ seo_image }}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "{{ seo_base }}/#website",
+        "url": "{{ seo_base }}/",
+        "name": {{ site.title | jsonify }},
+        "alternateName": "jabbott.dev",
+        "description": {{ site.description | normalize_whitespace | strip | jsonify }},
+        "inLanguage": {{ site.lang | jsonify }},
+        "publisher": { "@id": "{{ seo_base }}/#person" },
+        "author": { "@id": "{{ seo_base }}/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "{{ seo_base }}/#person",
+        "name": {{ r.name | jsonify }},
+        "url": "{{ seo_base }}/",
+        "mainEntityOfPage": "{{ seo_base }}/resume/",
+        "image": {{ site.avatar | jsonify }},
+        "jobTitle": {{ r.experience[0].role | jsonify }},
+        "description": {{ r.summary | normalize_whitespace | strip | jsonify }},
+        "worksFor": { "@type": "Organization", "name": {{ r.experience[0].org | jsonify }} },
+        "alumniOf": [{% for e in r.education %}{ "@type": "CollegeOrUniversity", "name": {{ e.school | jsonify }} }{% unless forloop.last %}, {% endunless %}{% endfor %}],
+        "hasCredential": [{% for e in r.education %}
+          { "@type": "EducationalOccupationalCredential", "name": {{ e.degree | jsonify }}, "credentialCategory": "degree", "recognizedBy": { "@type": "CollegeOrUniversity", "name": {{ e.school | jsonify }} } },{% endfor %}{% for c in r.certifications %}
+          { "@type": "EducationalOccupationalCredential", "name": {{ c.name | jsonify }}, "credentialCategory": "certification", "recognizedBy": { "@type": "Organization", "name": {{ c.issuer | jsonify }} } }{% unless forloop.last %},{% endunless %}{% endfor %}
+        ],
+        "knowsAbout": {{ seo_knows | jsonify }},
+        "knowsLanguage": [{% for l in r.languages %}{{ l.name | jsonify }}{% unless forloop.last %}, {% endunless %}{% endfor %}],
+        "address": { "@type": "PostalAddress", "addressLocality": {{ r.address.locality | jsonify }}, "addressCountry": {{ r.address.country | jsonify }} },
+        "sameAs": [
+          "https://github.com/{{ site.social.github }}",
+          "https://www.linkedin.com/in/{{ site.social.linkedin }}/",
+          "https://x.com/{{ site.social.x }}"
+        ]
+      },
+{%- if seo_is_post %}
+      {
+        "@type": "BlogPosting",
+        "@id": "{{ seo_url }}#article",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ seo_url }}" },
+        "url": "{{ seo_url }}",
+        "headline": {{ page.title | jsonify }},
+        "description": {{ seo_desc | jsonify }},
+        "image": {{ seo_image | jsonify }},
+        "datePublished": "{{ seo_published }}",
+        "dateModified": "{{ seo_modified }}",
+        "author": { "@id": "{{ seo_base }}/#person" },
+        "publisher": { "@id": "{{ seo_base }}/#person" },
+        "isPartOf": { "@id": "{{ seo_base }}/#blog" },
+        "inLanguage": {{ site.lang | jsonify }},
+        "wordCount": {{ page.content | strip_html | number_of_words }}{% if seo_project %},
+        "articleSection": {{ seo_project.name | jsonify }},
+        "keywords": [{{ seo_project.name | jsonify }}, {{ seo_project.language | jsonify }}{% if page.kind %}, {{ page.kind | jsonify }}{% endif %}],
+        "about": {
+          "@type": "SoftwareSourceCode",
+          "name": {{ seo_project.name | jsonify }},
+          "codeRepository": {{ seo_project.repo | jsonify }},
+          "programmingLanguage": {{ seo_project.language | jsonify }},
+          "description": {{ seo_project.summary | jsonify }},
+          "author": { "@id": "{{ seo_base }}/#person" }
+        }{% endif %}
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Engineering Log", "item": "{{ seo_base }}/" },{% if seo_project %}
+          { "@type": "ListItem", "position": 2, "name": {{ seo_project.name | jsonify }}, "item": "{{ seo_base }}/?project={{ seo_project.slug }}" },
+          { "@type": "ListItem", "position": 3, "name": {{ page.title | jsonify }}, "item": "{{ seo_url }}" }{% else %}
+          { "@type": "ListItem", "position": 2, "name": {{ page.title | jsonify }}, "item": "{{ seo_url }}" }{% endif %}
+        ]
+      }
+{%- elsif page.url == '/' %}
+      {
+        "@type": "Blog",
+        "@id": "{{ seo_base }}/#blog",
+        "url": "{{ seo_base }}/",
+        "name": "Engineering Log",
+        "description": {{ seo_desc | jsonify }},
+        "inLanguage": {{ site.lang | jsonify }},
+        "author": { "@id": "{{ seo_base }}/#person" },
+        "publisher": { "@id": "{{ seo_base }}/#person" },
+        "blogPost": [{% for post in site.posts limit: 25 %}
+          { "@type": "BlogPosting", "headline": {{ post.title | jsonify }}, "url": "{{ post.url | absolute_url }}", "datePublished": "{{ post.date | date_to_xmlschema }}", "description": {{ post.description | default: post.excerpt | strip_html | normalize_whitespace | strip | jsonify }} }{% unless forloop.last %},{% endunless %}{% endfor %}
+        ]
+      }
+{%- elsif page.url == '/resume/' %}
+      {
+        "@type": "ProfilePage",
+        "@id": "{{ seo_url }}#profile",
+        "url": "{{ seo_url }}",
+        "name": {{ seo_title | jsonify }},
+        "description": {{ seo_desc | jsonify }},
+        "dateModified": "{{ r.synced }}",
+        "isPartOf": { "@id": "{{ seo_base }}/#website" },
+        "mainEntity": { "@id": "{{ seo_base }}/#person" }
+      }
+{%- elsif page.url == '/deployments/' %}
+      {
+        "@type": "CollectionPage",
+        "@id": "{{ seo_url }}#page",
+        "url": "{{ seo_url }}",
+        "name": {{ seo_title | jsonify }},
+        "description": {{ seo_desc | jsonify }},
+        "isPartOf": { "@id": "{{ seo_base }}/#website" },
+        "mainEntity": {
+          "@type": "ItemList",
+          "itemListElement": [{% for d in site.data.deployments %}
+            { "@type": "ListItem", "position": {{ forloop.index }}, "item": { "@type": "WebSite", "name": {{ d.name | jsonify }}, "url": {{ d.url | jsonify }}, "description": {{ d.summary | jsonify }}, "isBasedOn": "https://github.com/{{ d.repo }}", "author": { "@id": "{{ seo_base }}/#person" } } }{% unless forloop.last %},{% endunless %}{% endfor %}
+          ]
+        }
+      }
+{%- else %}
+      {
+        "@type": "WebPage",
+        "@id": "{{ seo_url }}#page",
+        "url": "{{ seo_url }}",
+        "name": {{ seo_title | jsonify }},
+        "description": {{ seo_desc | jsonify }},
+        "isPartOf": { "@id": "{{ seo_base }}/#website" }
+      }
+{%- endif %}
+    ]
+  }
+  </script>

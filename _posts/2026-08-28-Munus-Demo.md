@@ -1,8 +1,11 @@
 ---
-layout: default
+layout: post
 title: "Munus v2.0 Demo"
 date: 2026-08-28 12:25:00 -0400
 categories: [intro]
+project: munus
+kind: Demo
+description: "A short animated demo of Munus v2.0, the Go task manager for the terminal."
 ---
 
 # DEMO

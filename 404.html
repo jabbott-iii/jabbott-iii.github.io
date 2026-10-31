@@ -1,0 +1,18 @@
+---
+layout: default
+title: Signal lost
+description: The page you were looking for is not on jabbott.dev.
+permalink: /404.html
+sitemap: false
+---
+<div class="container">
+  <section class="lost panel panel--brackets">
+    <p class="kicker">Error 404 <span class="kicker__sep">//</span> No signal</p>
+    <h1 class="lost__title">Signal lost</h1>
+    <p class="lost__text">There is nothing at this address. The page may have moved, or the link may be mistyped.</p>
+    <div class="btn-row">
+      <a class="btn btn--amber" href="{{ '/' | relative_url }}">{% include icon.html name="arrow-left" %}<span>Back to the log</span></a>
+      <a class="btn btn--ghost" href="{{ '/deployments/' | relative_url }}">{% include icon.html name="satellite" %}<span>Deployments</span></a>
+    </div>
+  </section>
+</div>

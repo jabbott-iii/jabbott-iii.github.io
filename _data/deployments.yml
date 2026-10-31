@@ -1,0 +1,10 @@
+# Sites deployed from repositories (GitHub Pages project sites and any subdomains).
+# Listed here they get the Deployments menu entry, a card on /deployments/, an llms.txt link,
+# structured data, and (when served from this domain) a sitemap entry.
+# The Deployments menu also asks the GitHub API for Pages-enabled repos at runtime and adds any
+# that are missing here, so a new deployment shows up before this file is updated.
+- name: Nadir
+  repo: jabbott-iii/Nadir
+  url: https://jabbott.dev/Nadir/
+  language: Rust
+  summary: Project documentation for Nadir, a high-performance Rust game engine and rendering framework.

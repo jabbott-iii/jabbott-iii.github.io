@@ -1,8 +1,10 @@
 ---
-layout: default
+layout: post
 title: "Denarii Dolor Privacy Policy"
 date: 2026-10-18 12:00:00 -0700
 categories: [intro]
+project: denarii-dolor
+kind: Policy
 description: "Privacy policy for the Denarii Dolor Android app, which keeps your financial records encrypted on your phone and has no account, ads, analytics or internet access."
 permalink: /denarii-dolor/privacy-policy/
 ---

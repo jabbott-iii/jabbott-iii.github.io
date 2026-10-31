@@ -1,0 +1,31 @@
+---
+layout: null
+permalink: /llms-full.txt
+sitemap: false
+---
+{%- capture nl %}
+{% endcapture -%}
+{%- capture fence_open %}{{ nl }}```{{ nl }}<pre{% endcapture -%}
+{%- capture fence_close %}</pre>{{ nl }}```{{ nl }}{% endcapture -%}
+# {{ site.title }}: full engineering log
+
+> Every post on {{ site.url }}, newest first, as plain text. Summary and links: {{ '/llms.txt' | absolute_url }}
+{% for post in site.posts %}
+{%- assign lp = site.data.projects | where: 'slug', post.project | first %}
+
+---
+
+## {{ post.title }}
+
+- URL: {{ post.url | absolute_url }}
+- Published: {{ post.date | date: '%Y-%m-%d' }}
+- Author: {{ site.author.name }}
+{%- if lp %}
+- Project: {{ lp.name }} ({{ lp.repo }})
+{%- endif %}
+{%- if post.description %}
+- Summary: {{ post.description }}
+{%- endif %}
+
+{{ post.content | replace: '<h1', '### <h1' | replace: '<h2', '#### <h2' | replace: '<h3', '##### <h3' | replace: '<li>', '<li>- ' | replace: '<pre', fence_open | replace: '</pre>', fence_close | strip_html | replace: '&lt;', '<' | replace: '&gt;', '>' | replace: '&quot;', '"' | replace: '&#39;', "'" | replace: '&amp;', '&' | strip }}
+{%- endfor %}

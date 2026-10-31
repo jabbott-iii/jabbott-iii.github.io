@@ -1,0 +1,199 @@
+# Resume data, copied from https://www.linkedin.com/in/josephabbottiii/ (signed-in view) on 2026-10-31.
+# Wording is LinkedIn's; only separators were changed for display.
+source: https://www.linkedin.com/in/josephabbottiii/
+synced: 2026-10-31
+
+name: Joseph Abbott III
+headline: Software Engineer · AWS Certified · Open Source Contributor · DevOps · AI Engineering · Experienced with government cybersecurity frameworks and policy.
+location: Boise Metropolitan Area
+address:
+  locality: Boise Metropolitan Area
+  country: US
+clearance: Active DoD Secret Clearance
+
+# First paragraph of the About section; also used as the description in structured data.
+summary: >-
+  Marine veteran and Senior Field Engineer who keeps mission-critical training systems secure and
+  running, now bringing that operational discipline to DevOps, DevSecOps, and cloud engineering.
+
+about:
+  - Marine veteran and Senior Field Engineer who keeps mission-critical training systems secure and running, now bringing that operational discipline to DevOps, DevSecOps, and cloud engineering.
+  - Since 2022, I’ve supported F-35 flight simulators for Lockheed Martin. I manage Linux servers, virtual machines, and Active Directory in environments where downtime and security gaps aren’t an option. Before that, I provided Tier 1 support on the NGEN contract. I also spent five years in the U.S. Marine Corps as a field radio operator, keeping communications up when it mattered.
+  - I have graduated with a B.S. in Software Engineering at Western Governors University and write code in Go, Python, Java/Kotlin, and SQL. I’m also building infrastructure-as-code skills and preparing for the HashiCorp Terraform Associate certification.
+  - "Clearance: Secret"
+  - I’m relocating to Boise, Idaho, and I’m open to DevOps, DevSecOps, Cloud, and Software Engineering roles in Boise or remote. Let’s connect.
+
+links:
+  - label: LinkedIn
+    url: https://www.linkedin.com/in/josephabbottiii/
+  - label: GitHub
+    url: https://github.com/jabbott-iii
+  - label: X
+    url: https://x.com/jabbottiii
+  - label: Engineering log
+    url: https://jabbott.dev/
+
+experience:
+  - role: Senior Field Engineer
+    org: Lockheed Martin
+    type: Full-time
+    period: Aug 2022 – Present
+    location: Luke AFB · On-site
+    highlights:
+      - Installed security updates on 300 machines to harden them against threats.
+      - Installed all new hardware and software on 300 machines, 12 F-35 cockpits, and 300 projectors. Enabling the training of 50+ F-35 pilots a day.
+      - Maintain, deploy, and repair 24 SuSE file servers and 48 RHEL virtual machines.
+      - Managed all user access for 68+ users on 16 isolated intranets with active directory.
+      - Preflight and launch flight simulations, completing up to 84 simulated missions per day.
+      - Utilized ALIS for all equipment change management and maintenance, to successfully replace or fix $21.5M+ in hardware.
+
+  - role: Senior Field Engineer
+    org: Delaware Resource Group
+    type: Full-time
+    period: Feb 2022 – Aug 2022
+    location: Luke AFB · On-site
+    highlights:
+      - Installed security updates on 300 machines to harden them against threats.
+      - Installed all new hardware and software on 300 machines, 12 F-35 cockpits, and 300 projectors. Enabling the training of 50+ F-35 pilots a day.
+      - Maintain, deploy, and repair 24 SuSE file servers and 48 RHEL virtual machines.
+      - Managed all user access for 68+ users on 16 isolated intranets with active directory.
+      - Preflight and launch flight simulations, completing up to 84 simulated missions per day.
+      - Utilized ALIS for all equipment change management and maintenance, to successfully replace or fix $21.5M+ in hardware.
+
+  - role: Tier 1 Agent
+    org: Leidos
+    type: Full-time
+    period: May 2021 – Feb 2022
+    location: Meridian, Idaho, United States · On-site
+    highlights:
+      - Handled over 4,000 service tickets ensuring every customer issue is handled appropriately. Ensuring as a team that contract metrics were met.
+
+  - role: Tier 1 Agent
+    org: Insight Global
+    type: Full-time
+    period: Apr 2020 – May 2021
+    location: Meridian, Idaho, United States · On-site
+    highlights:
+      - Handled over 4,000 service tickets ensuring every customer issue is handled appropriately. Ensuring as a team that contract metrics were met.
+
+  - role: Field Radio Operator, Sergeant / E5
+    org: United States Marine Corps
+    type: Contract
+    period: Jan 2015 – Jan 2020
+    location: Okinawa, Japan · On-site
+    highlights:
+      - Established satellite, radio, and computer-mediated communications for 20 training operations, 10 coalition operations, and 2 humanitarian aid operations. Zero communication failures during those operations ensured command and control had continuous communication throughout each operation.
+      - Managed 13 Marines ensuring combat readiness is always as close to 100% as possible.
+      - Planned all communications for 6 operations ensuring successful communication between all participating parties.
+      - Held 4 communications classes with 300 marines at each class. Resulting in 15+% reduction in the workload of the core 13 communications Marines on operations. Allowing them to focus on other priority issues.
+      - Handled all COMSEC and cryptographic requirements for 100+ communication systems. There were zero COMSEC incidents.
+
+education:
+  - school: Western Governors University
+    degree: Bachelor of Science - BS, Computer Software Engineering
+    period: Feb 2024 – Oct 2026
+    awards:
+      - Excellence Award in Back-End Programming
+
+certifications:
+  - name: AWS Certified Cloud Practitioner
+    issuer: Amazon Web Services (AWS)
+    issued: Aug 2026
+    expires: Aug 2029
+  - name: CompTIA Project+
+    issuer: CompTIA
+    issued: Aug 2026
+    expires: Aug 2029
+  - name: ITIL 4 Foundation Certificate in IT Service Management
+    issuer: PeopleCert
+    issued: Feb 2026
+    expires: Feb 2029
+  - name: CompTIA Security+
+    issuer: CompTIA
+    issued: Aug 2020
+    expires: Aug 2029
+
+projects:
+  - name: Open Source Project Contributions
+    period: Sep 2026 – Present
+    summary: Merged Pull Requests of contributions made to other projects.
+    contributions:
+      - project: s3-orchestrator
+        url: https://github.com/afreidah/s3-orchestrator
+        prs: [{ n: 1682, url: "https://github.com/afreidah/s3-orchestrator/pull/1682" }]
+      - project: AegisFlow
+        url: https://github.com/saivedant169/AegisFlow
+        prs: [{ n: 140, url: "https://github.com/saivedant169/AegisFlow/pull/140" }]
+      - project: InfraCanvas
+        url: https://github.com/bytestrix/InfraCanvas
+        prs:
+          - { n: 12, url: "https://github.com/bytestrix/InfraCanvas/pull/12" }
+          - { n: 19, url: "https://github.com/bytestrix/InfraCanvas/pull/19" }
+          - { n: 21, url: "https://github.com/bytestrix/InfraCanvas/pull/21" }
+  - name: CLI and TUI Projects
+    period: Jul 2026 – Present
+    summary: Command line interface applications and terminal user interface applications.
+    items: [munus, cryptare, salus, capsus]
+
+volunteer:
+  - role: Volunteer
+    org: United States Marine Corps
+    cause: Social Services
+    period: Sep 2015 – Nov 2019
+    summary: Community relation building in Okinawa, Japan.
+
+# The "Top skills" picked on the About card.
+top_skills:
+  - Software Engineers
+  - Open-Source Software
+  - Claude Code
+  - Continuous Integration and Continuous Delivery (CI/CD)
+  - Cloud Computing
+
+# LinkedIn's three skill categories, in LinkedIn's order.
+skills:
+  - group: Industry Knowledge
+    items:
+      - Software Engineers
+      - Large Language Models (LLM)
+      - Artificial Intelligence (AI)
+      - Cloud Computing
+      - Project Management
+      - Continuous Integration and Continuous Delivery (CI/CD)
+      - Version Control
+      - Go (Programming Language)
+      - Active DoD Secret Clearance
+      - Software Development
+      - IT Operations
+      - Cybersecurity
+      - System Administration
+      - Red Hat Enterprise Linux (RHEL)
+      - SUSE Linux Enterprise Server (SLES)
+      - IT Service Management
+      - Systems Engineering
+      - Server Administration
+  - group: Tools & Technologies
+    items:
+      - Kotlin
+      - Open-Source Software
+      - Amazon Web Services (AWS)
+      - Docker
+      - Python (Programming Language)
+      - Java
+      - SQL
+      - Spring Boot
+      - AngularJS
+      - Rust (Programming Language)
+      - Cascading Style Sheets (CSS)
+      - HTML
+      - Microsoft SQL Server
+      - Windows Server
+  - group: Other Skills
+    items:
+      - Claude Skills
+      - Claude Cowork
+      - Claude Code
+
+languages:
+  - name: English
+    level: Native or bilingual proficiency

@@ -1,0 +1,37 @@
+---
+layout: null
+permalink: /robots.txt
+sitemap: false
+---
+# {{ site.url }}
+# Covers this site and every project site GitHub Pages serves beneath it (for example {{ site.url }}/Nadir/).
+# A deployment on its own subdomain needs its own robots.txt; see the README.
+
+User-agent: *
+Allow: /
+Disallow: /404.html
+
+# Search and answer engines are welcome to read and cite everything here.
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: DuckDuckBot
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: Google-Extended
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: CCBot
+User-agent: Meta-ExternalAgent
+User-agent: Amazonbot
+Allow: /
+Disallow: /404.html
+
+Sitemap: {{ '/sitemap.xml' | absolute_url }}
+
+# Plain-text summary for language models: {{ '/llms.txt' | absolute_url }}

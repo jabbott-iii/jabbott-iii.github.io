@@ -1,16 +1,46 @@
-title: Joseph Abbott III Software Engineer
-description: Technical Weblog
-tagline: Notes on software, projects, and education.
-author: Joseph Abbott III
-url: "https://jabbott-iii.github.io"
-remote_theme: pages-themes/midnight@v0.2.0
+title: Joseph Abbott III
+tagline: Software Engineer & Marine Veteran
+description: >-
+  Engineering log of Joseph Abbott III, software engineer and U.S. Marine Corps
+  veteran: release notes and project updates for Munus, Cryptare, Salus and Denarii Dolor.
+lang: en-US
+locale: en_US
+url: "https://jabbott.dev"
+baseurl: ""
+
+author:
+  name: Joseph Abbott III
+  url: https://jabbott.dev/resume/
+
+social:
+  github: jabbott-iii
+  linkedin: josephabbottiii
+  x: jabbottiii
+
+# GitHub avatar doubles as the default share image and the person image in structured data.
+avatar: https://avatars.githubusercontent.com/u/84321953?v=4
+
 markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
 plugins:
   - jekyll-feed
-  - jekyll-seo-tag
-  - jekyll-paginate
-  - jekyll-remote-theme 
-paginate: 5
-paginate_path: "/page:num/"
-social_links:
-  github: jabbott-iii
+
+feed:
+  path: feed.xml
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .claude

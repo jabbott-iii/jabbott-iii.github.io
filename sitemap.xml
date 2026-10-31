@@ -1,0 +1,37 @@
+---
+layout: null
+permalink: /sitemap.xml
+sitemap: false
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{{ '/' | absolute_url }}</loc>
+    <lastmod>{{ site.posts.first.date | date_to_xmlschema }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+{%- for post in site.posts %}
+  <url>
+    <loc>{{ post.url | absolute_url | xml_escape }}</loc>
+    <lastmod>{{ post.last_modified_at | default: post.date | date_to_xmlschema }}</lastmod>
+    <priority>0.8</priority>
+  </url>
+{%- endfor %}
+{%- for p in site.html_pages %}
+  {%- if p.sitemap == false or p.url == '/' or p.url == '/index.html' %}{% continue %}{% endif %}
+  <url>
+    <loc>{{ p.url | replace: '/index.html', '/' | absolute_url | xml_escape }}</loc>
+    <priority>0.7</priority>
+  </url>
+{%- endfor %}
+{%- comment %} Project sites GitHub Pages serves under this domain share its sitemap. {% endcomment %}
+{%- for d in site.data.deployments %}
+  {%- if d.url contains site.url %}
+  <url>
+    <loc>{{ d.url | xml_escape }}</loc>
+    <priority>0.6</priority>
+  </url>
+  {%- endif %}
+{%- endfor %}
+</urlset>

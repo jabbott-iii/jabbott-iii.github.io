@@ -1,0 +1,56 @@
+---
+layout: null
+permalink: /llms.txt
+sitemap: false
+---
+{%- assign r = site.data.resume -%}
+# {{ site.title }}
+
+> {{ site.url | remove: 'https://' }} is the engineering log of {{ r.name }}: {{ r.experience[0].role }} at {{ r.experience[0].org }}, software engineer (B.S. Software Engineering, Western Governors University, 2026) and U.S. Marine Corps veteran. It holds release notes, project updates and open-source work on Go, Rust and Kotlin tools.
+
+Key facts:
+
+- Name: {{ r.name }}
+- Headline: {{ r.headline }}
+- Current role: {{ r.experience[0].role }}, {{ r.experience[0].org }} ({{ r.experience[0].period }}, {{ r.experience[0].location }})
+- Education: {% for e in r.education %}{{ e.degree }}, {{ e.school }} ({{ e.period }}){% endfor %}
+- Certifications: {% for c in r.certifications %}{{ c.name }}{% unless forloop.last %}; {% endunless %}{% endfor %}
+- Security clearance: {{ r.clearance }}
+- Location: {{ r.location }}
+- Profiles: GitHub https://github.com/{{ site.social.github }} · LinkedIn https://www.linkedin.com/in/{{ site.social.linkedin }}/ · X https://x.com/{{ site.social.x }}
+
+## Resume
+
+- [Resume]({{ '/resume/' | absolute_url }}): experience, education, certifications, projects and skills
+
+Experience, newest first:
+{% for e in r.experience %}
+- {{ e.role }}, {{ e.org }} ({{ e.type }}), {{ e.period }}, {{ e.location }}
+{%- endfor %}
+
+## Projects
+{% for p in site.data.projects %}
+- [{{ p.name }}]({{ p.repo }}): {{ p.summary }} Language: {{ p.language }}. Status: {{ p.status }}.
+{%- endfor %}
+
+## Deployments
+
+Sites built from these repositories and served live:
+{% for d in site.data.deployments %}
+- [{{ d.name }}]({{ d.url }}): {{ d.summary }} Source: https://github.com/{{ d.repo }}
+{%- endfor %}
+
+## Engineering log
+
+Newest first:
+{% for post in site.posts %}
+{%- assign lp = site.data.projects | where: 'slug', post.project | first %}
+- [{{ post.title }}]({{ post.url | absolute_url }}) ({{ post.date | date: '%Y-%m-%d' }}{% if lp %}, {{ lp.name }}{% endif %}): {{ post.description | default: post.excerpt | strip_html | normalize_whitespace | strip }}
+{%- endfor %}
+
+## Optional
+
+- [Full text of every post]({{ '/llms-full.txt' | absolute_url }})
+- [RSS feed]({{ '/feed.xml' | absolute_url }})
+- [Sitemap]({{ '/sitemap.xml' | absolute_url }})
+- [Site source](https://github.com/{{ site.social.github }}/{{ site.social.github }}.github.io)

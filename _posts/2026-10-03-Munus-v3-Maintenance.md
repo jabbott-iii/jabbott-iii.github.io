@@ -1,8 +1,11 @@
 ---
-layout: default
+layout: post
 title: "Munus v3.0.1 - Production Maintenance Phase"
 date: 2026-10-03 23:00:00 -0400
 categories: [intro]
+project: munus
+kind: Maintenance
+description: "Munus v3.0.1 enters production maintenance with task status and tags, relative deadlines, a per-user database, 19 closed security issues and fully automated releases."
 ---
 
 # [Munus v3.0.1 — Now in Production Maintenance](https://github.com/jabbott-iii/Munus/releases/tag/v3.0.1)

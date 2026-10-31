@@ -1,0 +1,15 @@
+{%- assign c_post = include.post -%}
+{%- assign c_proj = site.data.projects | where: 'slug', c_post.project | first -%}
+{%- assign c_desc = c_post.description | default: c_post.excerpt | strip_html | normalize_whitespace -%}
+{%- capture c_text -%}{{ c_post.title }} {{ c_desc }} {{ c_proj.name }} {{ c_post.kind }}{%- endcapture -%}
+<article class="card" data-project="{{ c_post.project | default: 'none' }}" data-text="{{ c_text | downcase | escape }}">
+  <div class="card__media">
+    {% include post-visual.html post=c_post %}
+    <span class="card__tab">{{ c_post.kind | default: 'Log' }}</span>
+  </div>
+  <div class="card__body">
+    <p class="card__meta"><time datetime="{{ c_post.date | date_to_xmlschema }}">{{ c_post.date | date: '%Y-%m-%d' }}</time> <span aria-hidden="true">·</span> {{ c_proj.name | default: 'Log' }}</p>
+    <h3 class="card__title"><a href="{{ c_post.url | relative_url }}">{{ c_post.title }}</a></h3>
+    <p class="card__excerpt">{{ c_desc | truncate: 170 }}</p>
+  </div>
+</article>

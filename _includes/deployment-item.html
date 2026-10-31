@@ -1,0 +1,8 @@
+<li class="deploy-item" data-deploy-repo="{{ include.d.repo | downcase }}">
+                <a class="deploy-item__link" href="{{ include.d.url }}" target="_blank" rel="noopener">
+                  <span class="status-dot" aria-hidden="true"></span>
+                  <span class="deploy-item__name">{{ include.d.name }}</span>
+                  <span class="deploy-item__host">{{ include.d.url | remove: 'https://' | remove: 'http://' }}</span>
+                </a>
+                <a class="deploy-item__repo" href="https://github.com/{{ include.d.repo }}" target="_blank" rel="noopener" aria-label="{{ include.d.name }} repository on GitHub">{% include icon.html name="github" %}</a>
+              </li>

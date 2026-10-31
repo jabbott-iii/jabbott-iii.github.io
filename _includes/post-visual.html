@@ -1,0 +1,21 @@
+{%- comment -%}
+  Thumbnail for a post: front matter `image`, else the first <img> in the post, else a generated
+  project plate. Pass loading="eager" for above-the-fold use.
+{%- endcomment -%}
+{%- assign v_post = include.post -%}
+{%- assign v_img = v_post.image -%}
+{%- if v_img == nil and v_post.content contains '<img' -%}
+  {%- assign v_parts = v_post.content | split: '<img' -%}
+  {%- assign v_src = v_parts[1] | split: 'src="' -%}
+  {%- assign v_img = v_src[1] | split: '"' | first -%}
+{%- endif -%}
+{%- assign v_proj = site.data.projects | where: 'slug', v_post.project | first -%}
+{%- if v_img -%}
+<img class="visual__img" src="{{ v_img }}" alt="" loading="{{ include.loading | default: 'lazy' }}" decoding="async">
+{%- else -%}
+<div class="visual__plate" data-lang="{{ v_proj.language | default: 'none' | downcase }}">
+  <span class="visual__ring"></span>
+  <span class="visual__name">{{ v_proj.name | default: 'Log' }}</span>
+  <span class="visual__code">{{ v_post.kind | default: 'Entry' }} · {{ v_post.date | date: '%Y.%m.%d' }}</span>
+</div>
+{%- endif -%}

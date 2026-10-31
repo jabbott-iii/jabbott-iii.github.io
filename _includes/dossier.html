@@ -1,0 +1,21 @@
+{%- assign r = site.data.resume -%}
+<section class="side-panel panel panel--brackets dossier" aria-labelledby="dossier-title">
+  <div class="dossier__top">
+    <span class="hex-avatar"><img src="{{ site.avatar }}&amp;s=160" alt="Portrait of {{ r.name }}" width="72" height="72" loading="lazy"></span>
+    <div>
+      <p class="kicker kicker--sm">Pilot dossier</p>
+      <h2 class="dossier__name" id="dossier-title">{{ r.name }}</h2>
+    </div>
+  </div>
+  <p class="dossier__headline">{{ r.headline }}</p>
+  <p class="dossier__bio">I am a United States Marine Corps veteran who went into IT before software engineering. My dream is to work on machine learning and robotics programs.</p>
+  <div class="btn-row">
+    <a class="btn btn--amber btn--sm" href="{{ '/resume/' | relative_url }}">{% include icon.html name="id" %}<span>Resume</span></a>
+    <a class="btn btn--teal btn--sm" href="https://github.com/{{ site.social.github }}" rel="me noopener" target="_blank">{% include icon.html name="github" %}<span>GitHub</span></a>
+  </div>
+  <ul class="dossier__links">
+    <li><a href="https://www.linkedin.com/in/{{ site.social.linkedin }}/" rel="me noopener">{% include icon.html name="linkedin" %}<span class="sr-only">LinkedIn</span></a></li>
+    <li><a href="https://x.com/{{ site.social.x }}" rel="me noopener">{% include icon.html name="x" %}<span class="sr-only">X</span></a></li>
+    <li><a href="{{ '/feed.xml' | relative_url }}">{% include icon.html name="rss" %}<span class="sr-only">RSS feed</span></a></li>
+  </ul>
+</section>

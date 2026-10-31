@@ -1,0 +1,56 @@
+# Projects referenced by posts (`project:` front matter), the resume, llms.txt and structured data.
+- slug: munus
+  name: Munus
+  repo: https://github.com/jabbott-iii/Munus
+  language: Go
+  status: Production maintenance
+  summary: Terminal-first task manager with a Bubble Tea TUI and Cobra CLI, SQLite storage, tags, relative deadlines and import/export.
+
+- slug: cryptare
+  name: Cryptare
+  repo: https://github.com/jabbott-iii/Cryptare
+  language: Go
+  status: Active
+  summary: File encryption and compression TUI/CLI using AES-256-GCM and Argon2id, with a password-protected key store and signed releases.
+
+- slug: salus
+  name: Salus
+  repo: https://github.com/jabbott-iii/Salus
+  language: Go
+  status: Active
+  summary: Environment health checker for disk, memory, CPU, Docker, Kubernetes, services, certificates and misconfigurations with PASS/WARN/FAIL reporting.
+
+- slug: denarii-dolor
+  name: Denarii Dolor
+  repo: https://github.com/jabbott-iii/DenariiDolor
+  language: Kotlin
+  status: Active
+  summary: Android personal finance app that keeps an encrypted (SQLCipher) ledger on the phone, with no account, ads, analytics or internet access.
+
+- slug: nadir
+  name: Nadir
+  repo: https://github.com/jabbott-iii/Nadir
+  language: Rust
+  status: In development
+  summary: Rust game engine and rendering framework with an ECS, cross-platform platform and FFI layers, asset pipelines and a deterministic runtime.
+
+- slug: capsus
+  name: Capsus
+  repo: https://github.com/jabbott-iii/Capsus
+  language: Go
+  status: In development
+  summary: CLI toolbox that bundles every command-line tool I have built into one binary.
+
+- slug: vagor
+  name: Vagor
+  repo: https://github.com/jabbott-iii/Vagor
+  language: Kotlin
+  status: In development
+  summary: Vacation planning app for Android.
+
+- slug: open-source
+  name: Open Source
+  repo: https://github.com/jabbott-iii/open-source-project-contributions
+  language: Various
+  status: Ongoing
+  summary: Merged pull requests to s3-orchestrator, AegisFlow and InfraCanvas.

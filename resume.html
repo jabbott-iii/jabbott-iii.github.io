@@ -1,0 +1,177 @@
+---
+layout: default
+title: Resume
+description: "Resume of Joseph Abbott III: Senior Field Engineer at Lockheed Martin, U.S. Marine Corps veteran and software engineer (B.S., WGU) with AWS, CompTIA and ITIL certifications."
+permalink: /resume/
+body_class: resume
+---
+{%- assign r = site.data.resume -%}
+<div class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{{ '/' | relative_url }}">Log</a></li>
+      <li aria-current="page">Resume</li>
+    </ol>
+  </nav>
+
+  <div class="resume-actions">
+    <button class="btn btn--slate btn--sm" type="button" data-print>{% include icon.html name="print" %}<span>Print / save PDF</span></button>
+    <a class="btn btn--ghost btn--sm" href="{{ r.source }}" rel="me noopener" target="_blank">{% include icon.html name="linkedin" %}<span>LinkedIn</span></a>
+    <a class="btn btn--teal btn--sm" href="https://github.com/{{ site.social.github }}" rel="me noopener" target="_blank">{% include icon.html name="github" %}<span>GitHub</span></a>
+  </div>
+
+  <article class="resume panel panel--brackets">
+    <header class="resume__header">
+      <span class="hex-avatar hex-avatar--lg"><img src="{{ site.avatar }}&amp;s=240" alt="Portrait of {{ r.name }}" width="112" height="112"></span>
+      <div class="resume__id">
+        <p class="kicker">Personnel file</p>
+        <h1 class="resume__name">{{ r.name }}</h1>
+        <p class="resume__headline">{{ r.headline }}</p>
+        <ul class="resume__contact">
+          <li>{% include icon.html name="pin" %}<span>{{ r.location }}</span></li>
+          {%- if r.clearance %}
+          <li>{% include icon.html name="shield" %}<span>{{ r.clearance }}</span></li>
+          {%- endif %}
+          {%- for l in r.links %}
+          <li><a href="{{ l.url }}" rel="me noopener">{{ l.label }}</a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+    </header>
+
+    <section class="resume__section resume__summary" aria-labelledby="summary-title">
+      <h2 class="section-title" id="summary-title">About</h2>
+      {%- for para in r.about %}
+      <p>{{ para }}</p>
+      {%- endfor %}
+    </section>
+
+    <div class="resume__cols">
+      <div class="resume__main">
+        <section class="resume__section" aria-labelledby="experience-title">
+          <h2 class="section-title" id="experience-title">Experience</h2>
+          <ol class="timeline">
+            {%- for e in r.experience %}
+            <li>
+              <h3 class="entry__role">{{ e.role }}</h3>
+              <p class="entry__org">{{ e.org }}{% if e.type %} <span class="entry__type">· {{ e.type }}</span>{% endif %}</p>
+              <p class="entry__meta">{{ e.period }} · {{ e.location }}</p>
+              {%- if e.highlights %}
+              <ul class="entry__list">
+                {%- for h in e.highlights %}
+                <li>{{ h }}</li>
+                {%- endfor %}
+              </ul>
+              {%- endif %}
+            </li>
+            {%- endfor %}
+          </ol>
+        </section>
+
+        <section class="resume__section" aria-labelledby="projects-title">
+          <h2 class="section-title" id="projects-title">Projects</h2>
+          {%- for pr in r.projects %}
+          <div class="project-block">
+            <h3 class="entry__role">{{ pr.name }}</h3>
+            <p class="entry__meta">{{ pr.period }}</p>
+            <p class="entry__text">{{ pr.summary }}</p>
+            {%- if pr.items %}
+            <ul class="project-list">
+              {%- for slug in pr.items %}
+              {%- assign p = site.data.projects | where: 'slug', slug | first %}
+              <li>
+                <a href="{{ p.repo }}" rel="noopener">{{ p.name }}</a>
+                <span class="tag">{{ p.language }}</span>
+                <span class="project-list__text">{{ p.summary }}</span>
+              </li>
+              {%- endfor %}
+            </ul>
+            {%- endif %}
+            {%- if pr.contributions %}
+            <ul class="project-list">
+              {%- for c in pr.contributions %}
+              <li>
+                <a href="{{ c.url }}" rel="noopener">{{ c.project }}</a>
+                <span class="project-list__text">Merged pull request{% if c.prs.size > 1 %}s{% endif %}
+                  {% for pull in c.prs %}<a href="{{ pull.url }}" rel="noopener">#{{ pull.n }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</span>
+              </li>
+              {%- endfor %}
+            </ul>
+            {%- endif %}
+          </div>
+          {%- endfor %}
+        </section>
+
+        <section class="resume__section" aria-labelledby="volunteer-title">
+          <h2 class="section-title" id="volunteer-title">Volunteer</h2>
+          <ol class="timeline">
+            {%- for v in r.volunteer %}
+            <li>
+              <h3 class="entry__role">{{ v.role }}</h3>
+              <p class="entry__org">{{ v.org }}{% if v.cause %} <span class="entry__type">· {{ v.cause }}</span>{% endif %}</p>
+              <p class="entry__meta">{{ v.period }}</p>
+              <p class="entry__text">{{ v.summary }}</p>
+            </li>
+            {%- endfor %}
+          </ol>
+        </section>
+      </div>
+
+      <div class="resume__side">
+        <section class="resume__section" aria-labelledby="education-title">
+          <h2 class="section-title" id="education-title">Education</h2>
+          {%- for e in r.education %}
+          <div class="info-card">
+            <h3 class="entry__role">{{ e.degree }}</h3>
+            <p class="entry__org">{{ e.school }}</p>
+            <p class="entry__meta">{{ e.period }}</p>
+            {%- for a in e.awards %}
+            <p class="entry__award">{% include icon.html name="award" %}<span>{{ a }}</span></p>
+            {%- endfor %}
+          </div>
+          {%- endfor %}
+        </section>
+
+        <section class="resume__section" aria-labelledby="certs-title">
+          <h2 class="section-title" id="certs-title">Certifications</h2>
+          <ul class="cert-list">
+            {%- for c in r.certifications %}
+            <li class="info-card">
+              <h3 class="cert__name">{{ c.name }}</h3>
+              <p class="entry__org">{{ c.issuer }}</p>
+              <p class="entry__meta">Issued {{ c.issued }}{% if c.expires %} · Expires {{ c.expires }}{% endif %}</p>
+            </li>
+            {%- endfor %}
+          </ul>
+        </section>
+
+        <section class="resume__section" aria-labelledby="skills-title">
+          <h2 class="section-title" id="skills-title">Skills</h2>
+          {%- if r.top_skills %}
+          <h3 class="skill-group">Top skills</h3>
+          <ul class="tag-list">
+            {%- for s in r.top_skills %}<li class="tag tag--top">{{ s }}</li>{% endfor %}
+          </ul>
+          {%- endif %}
+          {%- for g in r.skills %}
+          <h3 class="skill-group">{{ g.group }}</h3>
+          <ul class="tag-list">
+            {%- for s in g.items %}<li class="tag">{{ s }}</li>{% endfor %}
+          </ul>
+          {%- endfor %}
+        </section>
+
+        <section class="resume__section" aria-labelledby="languages-title">
+          <h2 class="section-title" id="languages-title">Languages</h2>
+          {%- for l in r.languages %}
+          <p class="entry__text"><strong>{{ l.name }}</strong> · {{ l.level }}</p>
+          {%- endfor %}
+        </section>
+      </div>
+    </div>
+
+    <footer class="resume__source">
+      Profile data from <a href="{{ r.source }}" rel="noopener">LinkedIn</a>, last synced {{ r.synced | date: '%B %-d, %Y' }}. Project details link to their GitHub repositories.
+    </footer>
+  </article>
+</div>
