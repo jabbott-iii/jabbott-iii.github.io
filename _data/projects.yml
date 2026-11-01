@@ -1,4 +1,6 @@
-# Projects referenced by posts (`project:` front matter), the resume, llms.txt and structured data.
+# Projects referenced by posts (`project:` front matter), the home page, llms.txt and structured data.
+# The home page lists them in this order. Set `status: Archived` to move a project from the
+# Projects column to the Archive column.
 - slug: munus
   name: Munus
   repo: https://github.com/jabbott-iii/Munus

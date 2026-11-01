@@ -1,93 +1,104 @@
 ---
 layout: default
-title: Engineering Log
+description: "Joseph Abbott III, software engineer and U.S. Marine Corps veteran: resume, engineering log, and live deployments.
 body_class: home
 ---
+{%- assign r = site.data.resume -%}
+{%- assign latest = site.posts | first -%}
+{%- assign post_count = site.posts | size -%}
+{%- assign deploy_count = site.data.deployments | size -%}
+{%- assign archived = site.data.projects | where: 'status', 'Archived' -%}
+{%- assign archived_count = archived | size -%}
+{%- assign active_count = site.data.projects | size | minus: archived_count -%}
 <div class="container">
-  <header class="page-head">
-    <div>
-      <p class="eyebrow">jabbott.dev</p>
-      <h1 class="section-title section-title--xl">Engineering Log</h1>
-    </div>
-    <p class="page-head__lede">Release notes, project updates and field reports from Joseph Abbott III, software engineer and U.S. Marine Corps veteran.</p>
-  </header>
-
-  <section class="hero panel panel--brackets" data-carousel aria-roledescription="carousel" aria-label="Featured posts">
-    {%- for post in site.posts limit: 4 %}
-    {%- assign h_proj = site.data.projects | where: 'slug', post.project | first %}
-    <article class="hero__slide{% if forloop.first %} is-active{% endif %}" id="hero-slide-{{ forloop.index }}" role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} of {{ forloop.length }}"{% unless forloop.first %} hidden{% endunless %}>
-      <a class="hero__media" href="{{ post.url | relative_url }}" tabindex="-1" aria-hidden="true">
-        {%- if forloop.first %}{% include post-visual.html post=post loading='eager' %}{% else %}{% include post-visual.html post=post %}{% endif -%}
-      </a>
-      <div class="hero__copy">
-        <p class="kicker">{{ h_proj.name | default: 'Log' }} <span class="kicker__sep">//</span> {{ post.kind | default: 'Entry' }}</p>
-        <h2 class="hero__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-        <p class="hero__text">{{ post.description | default: post.excerpt | strip_html | normalize_whitespace | truncate: 220 }}</p>
-        <a class="link-arrow" href="{{ post.url | relative_url }}">Read transmission {% include icon.html name="arrow" %}<span class="sr-only">: {{ post.title }}</span></a>
-      </div>
-    </article>
-    {%- endfor %}
-    <div class="hero__bars" role="tablist" aria-label="Choose a featured post">
-      {%- for post in site.posts limit: 4 %}
-      <button class="hero__bar{% if forloop.first %} is-active{% endif %}" type="button" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="hero-slide-{{ forloop.index }}" aria-label="{{ post.title | escape }}"><span></span></button>
-      {%- endfor %}
+  <section class="welcome" aria-labelledby="welcome-title">
+    <span class="hex-avatar hex-avatar--lg"><img src="{{ site.avatar }}&amp;s=240" alt="Portrait of {{ r.name }}" width="112" height="112"></span>
+    <div class="welcome__copy">
+      <p class="kicker">Welcome aboard <span class="kicker__sep">//</span> jabbott.dev</p>
+      <h1 class="welcome__title" id="welcome-title">Hi, I’m Joseph Abbott III.</h1>
+      <p class="welcome__text">Thanks for stopping by. I’m a software engineer and U.S. Marine Corps veteran, and this is where I keep my resume, my engineering log, and the sites I have deployed.</p>
     </div>
   </section>
 
-  <div class="command-bar panel" role="search">
-    <div class="chips" role="group" aria-label="Filter by project">
-      <button class="chip is-active" type="button" data-filter="all" aria-pressed="true">All <span class="chip__count">{{ site.posts | size }}</span></button>
-      {%- for p in site.data.projects %}
-      {%- assign p_count = site.posts | where: 'project', p.slug | size %}
-      {%- if p_count > 0 %}
-      <button class="chip" type="button" data-filter="{{ p.slug }}" aria-pressed="false">{{ p.name }} <span class="chip__count">{{ p_count }}</span></button>
-      {%- endif %}
-      {%- endfor %}
-    </div>
-    <label class="search">
-      <span class="sr-only">Search the log</span>
-      <input type="search" placeholder="Search the log" autocomplete="off" data-search>
-      {% include icon.html name="search" %}
-    </label>
-  </div>
+  <nav aria-label="Site sections">
+    <ul class="portals">
+      <li class="portal portal--resume">
+        <span class="portal__fx" aria-hidden="true">{% include icon.html name="id" class="portal__ghost" %}</span>
+        <div class="portal__top">
+          <span class="portal__index">01</span>
+          <span class="portal__icon">{% include icon.html name="id" %}</span>
+        </div>
+        <h2 class="portal__title"><a href="{{ '/resume/' | relative_url }}">Resume</a></h2>
+        <p class="portal__text">Experience, education, certifications and skills, synced from LinkedIn and ready to print.</p>
+        <p class="portal__meta"><span>Synced {{ r.synced | date: '%Y.%m.%d' }}</span>{% include icon.html name="arrow" class="portal__arrow" %}</p>
+      </li>
 
-  <div class="layout">
-    <section class="feed" aria-labelledby="feed-title">
+      <li class="portal portal--log">
+        <span class="portal__fx" aria-hidden="true">{% include icon.html name="log" class="portal__ghost" %}</span>
+        <div class="portal__top">
+          <span class="portal__index">02</span>
+          <span class="portal__icon">{% include icon.html name="log" %}</span>
+        </div>
+        <h2 class="portal__title"><a href="{{ '/log/' | relative_url }}">Log</a></h2>
+        <p class="portal__text">Release notes, project updates and open source contributions, newest first, with filters and search.</p>
+        <p class="portal__meta"><span>{{ post_count }} {% if post_count == 1 %}entry{% else %}entries{% endif %} · {{ latest.date | date: '%Y.%m.%d' }}</span>{% include icon.html name="arrow" class="portal__arrow" %}</p>
+      </li>
+
+      <li class="portal portal--deploy">
+        <span class="portal__fx" aria-hidden="true">{% include icon.html name="satellite" class="portal__ghost" %}</span>
+        <div class="portal__top">
+          <span class="portal__index">03</span>
+          <span class="portal__icon">{% include icon.html name="satellite" %}</span>
+        </div>
+        <h2 class="portal__title"><a href="{{ '/deployments/' | relative_url }}">Deployments</a></h2>
+        <p class="portal__text">Live sites built and served straight from my GitHub repositories, with links to each site and its source.</p>
+        <p class="portal__meta"><span><span class="status-dot" aria-hidden="true"></span> {{ deploy_count }} live {% if deploy_count == 1 %}site{% else %}sites{% endif %}</span>{% include icon.html name="arrow" class="portal__arrow" %}</p>
+      </li>
+
+      <li class="portal portal--tbd">
+        <span class="portal__fx" aria-hidden="true"></span>
+        <div class="portal__top">
+          <span class="portal__index">04</span>
+          <span class="portal__icon">{% include icon.html name="dots" %}</span>
+        </div>
+        <h2 class="portal__title">TBD<span class="sr-only">: placeholder for a future section</span></h2>
+        <div class="portal__redacted" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="portal__meta" aria-hidden="true"><span>— — —</span></p>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="layout home-projects">
+    <section aria-labelledby="projects-title">
       <div class="section-head">
-        <h2 class="section-title" id="feed-title">Latest transmissions</h2>
+        <h2 class="section-title" id="projects-title">Projects</h2>
+        <span class="section-head__count">{{ active_count }} active</span>
       </div>
-      <div class="card-grid" data-cards>
-        {%- for post in site.posts %}
-        {% include post-card.html post=post %}
+      <ul class="project-grid">
+        {%- for p in site.data.projects %}
+        {%- if p.status == 'Archived' %}{% continue %}{% endif %}
+        {% include project-card.html project=p %}
         {%- endfor %}
-      </div>
-      <p class="empty panel" data-empty hidden>No transmissions match that filter. <button class="link-button" type="button" data-reset>Show everything</button></p>
-      <div class="load-more">
-        <button class="btn btn--slate" type="button" data-more hidden>Load older transmissions</button>
-      </div>
+      </ul>
     </section>
 
-    <aside class="sidebar" aria-label="About and links">
-      {% include dossier.html %}
-
-      <section class="side-panel panel" aria-labelledby="deploy-side-title">
-        <h2 class="side-panel__title" id="deploy-side-title">Live deployments</h2>
-        <ul class="deploy-list" data-deploy-list>
-          {%- for d in site.data.deployments %}
-          {% include deployment-item.html d=d %}
-          {%- endfor %}
-        </ul>
-        <a class="link-arrow link-arrow--sm" href="{{ '/deployments/' | relative_url }}">All deployments {% include icon.html name="arrow" %}</a>
-      </section>
-
-      <section class="side-panel panel" aria-labelledby="projects-title">
-        <h2 class="side-panel__title" id="projects-title">Projects</h2>
-        <ul class="list-rows">
-          {%- for p in site.data.projects %}
-          <li><a href="{{ p.repo }}" rel="noopener">{{ p.name }}<small>{{ p.language }} · {{ p.status }}</small></a></li>
-          {%- endfor %}
-        </ul>
-      </section>
-    </aside>
+    <section aria-labelledby="archive-title">
+      <div class="section-head">
+        <h2 class="section-title" id="archive-title">Archive</h2>
+        <span class="section-head__count">{{ archived_count }} archived</span>
+      </div>
+      {%- if archived_count > 0 %}
+      <ul class="project-grid">
+        {%- for p in archived %}
+        {% include project-card.html project=p %}
+        {%- endfor %}
+      </ul>
+      {%- else %}
+      <div class="archive-empty">
+        <p class="archive-empty__title">Nothing archived yet</p>
+        <p class="archive-empty__text">Projects that are retired from active development are kept here for reference.</p>
+      </div>
+      {%- endif %}
+    </section>
   </div>
 </div>

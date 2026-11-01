@@ -386,6 +386,264 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; }
 .breadcrumbs a:hover { color: var(--teal-hi); }
 .breadcrumbs [aria-current] { color: var(--text-3); }
 
+/* ---------- Home: welcome ---------- */
+
+.welcome {
+  display: flex; align-items: center; gap: clamp(18px, 3vw, 32px);
+  padding: 52px 0 36px;
+}
+.welcome__copy { min-width: 0; }
+.welcome__title {
+  margin: 0 0 12px;
+  font-size: clamp(30px, 4.6vw, 52px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: 0.02em;
+}
+.welcome__text { margin: 0; max-width: 62ch; color: var(--text-2); font-size: clamp(16px, 1.5vw, 18px); line-height: 1.65; }
+
+/* ---------- Home: destination tiles ---------- */
+
+.portals {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0 0 64px; padding: 0;
+  list-style: none;
+}
+
+.portal {
+  --accent: var(--teal);
+  position: relative;
+  isolation: isolate;
+  display: flex; flex-direction: column;
+  min-height: 300px;
+  padding: 24px 24px 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.portal--resume { --accent: var(--amber); }
+.portal--deploy { --accent: var(--green); }
+.portal--tbd { --accent: var(--text-3); }
+
+/* Corner brackets that open out on hover, like a targeting reticle. */
+.portal::before,
+.portal::after {
+  content: "";
+  position: absolute;
+  width: 18px; height: 18px;
+  border: 1px solid var(--accent);
+  pointer-events: none;
+  transition: width 0.25s ease, height 0.25s ease;
+}
+.portal::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+.portal::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+
+/* Backdrop: accent glow, scan lines, a large ghost icon and a sweep on hover. */
+.portal__fx {
+  position: absolute; inset: 0; z-index: -1;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 70% at 100% 0%, color-mix(in srgb, var(--accent) 15%, transparent), transparent 62%),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px) 0 0 / 100% 22px;
+}
+.portal__fx::after {
+  content: "";
+  position: absolute; left: 0; right: 0; top: 0; height: 45%;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--accent) 10%, transparent) 80%, color-mix(in srgb, var(--accent) 55%, transparent));
+  opacity: 0;
+  transform: translateY(-110%);
+}
+.portal__ghost {
+  position: absolute; right: -28px; bottom: -34px;
+  width: 190px; height: 190px;
+  color: var(--accent);
+  stroke-width: 0.6;
+  opacity: 0.07;
+  transition: opacity 0.25s ease, transform 0.4s ease;
+}
+
+.portal__top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 30px; }
+.portal__index {
+  font-family: var(--mono);
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+.portal__index::after {
+  content: "";
+  display: block;
+  width: 26px; height: 1px;
+  margin-top: 8px;
+  background: var(--accent);
+  opacity: 0.6;
+}
+.portal__icon {
+  position: relative;
+  display: grid; place-items: center;
+  width: 54px; height: 58px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 55%, transparent);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+.portal__icon::before {
+  content: "";
+  position: absolute; inset: 1px;
+  background: var(--panel-solid);
+  clip-path: inherit;
+}
+.portal__icon .icon { position: relative; width: 24px; height: 24px; }
+
+.portal__title {
+  margin: 0 0 10px;
+  font-size: clamp(24px, 2.3vw, 30px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.portal__title a { color: var(--text); }
+.portal__title a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.portal__title a:focus-visible { outline: none; }
+.portal__text { margin: 0 0 22px; color: var(--text-2); font-size: 15px; line-height: 1.55; }
+
+.portal__meta {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin: auto 0 0; padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-3);
+}
+.portal__meta > span { display: inline-flex; align-items: center; gap: 8px; }
+.portal__arrow { color: var(--accent); transition: transform 0.2s ease; }
+
+.portal:not(.portal--tbd):hover,
+.portal:focus-within {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5), 0 0 36px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.portal:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
+.portal:not(.portal--tbd):hover::before,
+.portal:not(.portal--tbd):hover::after,
+.portal:focus-within::before,
+.portal:focus-within::after { width: 34px; height: 34px; }
+.portal:not(.portal--tbd):hover .portal__fx::after { animation: portal-scan 1.2s ease-out; }
+.portal:not(.portal--tbd):hover .portal__ghost { opacity: 0.13; transform: translate(-6px, -6px); }
+.portal:hover .portal__title a,
+.portal:focus-within .portal__title a { color: color-mix(in srgb, var(--accent) 55%, #fff); }
+.portal:hover .portal__arrow,
+.portal:focus-within .portal__arrow { transform: translateX(4px); }
+
+@keyframes portal-scan {
+  15% { opacity: 1; }
+  to { opacity: 0; transform: translateY(240%); }
+}
+
+/* Placeholder tile: no link, hatched and dashed. */
+.portal--tbd {
+  border-style: dashed;
+  border-color: var(--line-2);
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.022) 0 10px, transparent 10px 20px),
+    var(--panel);
+}
+.portal--tbd .portal__fx { background: none; }
+.portal--tbd .portal__title { color: var(--text-3); letter-spacing: 0.3em; }
+.portal__redacted { display: grid; gap: 9px; margin: 6px 0 22px; }
+.portal__redacted span { display: block; height: 9px; background: rgba(255, 255, 255, 0.06); }
+.portal__redacted span:nth-child(2) { width: 82%; }
+.portal__redacted span:nth-child(3) { width: 56%; }
+
+/* ---------- Home: projects and archive ---------- */
+
+.layout.home-projects { gap: 36px 40px; }
+.section-head__count {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 18px;
+  margin: 0; padding: 0;
+  list-style: none;
+}
+
+.project {
+  --accent: var(--teal);
+  position: relative;
+  display: flex; flex-direction: column;
+  padding: 20px 20px 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--accent);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.project[data-lang="rust"] { --accent: var(--rust); }
+.project[data-lang="kotlin"] { --accent: var(--violet); }
+.project[data-lang="various"] { --accent: var(--amber); }
+.project:hover {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  border-top-color: var(--accent);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+}
+
+.project__meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 12px; }
+.project__lang {
+  font-family: var(--mono);
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent);
+}
+.project__name { margin: 0 0 8px; font-size: 21px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.project__summary { flex: 1; margin: 0 0 18px; color: var(--text-2); font-size: 14.5px; line-height: 1.6; }
+.project__links { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.status {
+  --status: var(--teal);
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 9px;
+  font-size: 10.5px; font-weight: 700; line-height: 1.4;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--status);
+  background: color-mix(in srgb, var(--status) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--status) 40%, transparent);
+  border-radius: 999px;
+}
+.status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.status[data-status="production-maintenance"] { --status: var(--green); }
+.status[data-status="in-development"] { --status: var(--amber); }
+.status[data-status="archived"] { --status: var(--text-3); }
+
+.project--archived[data-lang] { --accent: var(--text-3); border-top-style: dashed; }
+.project--archived .project__name { color: var(--text-2); }
+
+.archive-empty {
+  padding: 28px 24px;
+  text-align: center;
+  border: 1px dashed var(--line-2);
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.018) 0 10px, transparent 10px 20px);
+}
+.archive-empty__title {
+  margin: 0 0 6px;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-2);
+}
+.archive-empty__text { margin: 0; color: var(--text-3); font-size: 14px; line-height: 1.6; }
+
 /* ---------- Hero carousel ---------- */
 
 .hero { padding: clamp(16px, 2.4vw, 28px); margin-bottom: 20px; }
@@ -1111,6 +1369,8 @@ a.pager__link:hover { background: #1a2023; color: var(--teal-hi); }
 
 @media (max-width: 1080px) {
   .layout { grid-template-columns: minmax(0, 1fr); }
+  .portals { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .portal { min-height: 270px; }
   .sidebar { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
 }
 
@@ -1142,6 +1402,11 @@ a.pager__link:hover { background: #1a2023; color: var(--teal-hi); }
   .brand__mark { width: 32px; height: 32px; }
   .brand__name { font-size: 16px; letter-spacing: 0.22em; }
   .brand__sub { letter-spacing: 0.42em; }
+  .welcome { flex-direction: column; align-items: flex-start; gap: 18px; padding-top: 32px; }
+  .welcome .hex-avatar--lg { --size: 84px; }
+  .portals { grid-template-columns: minmax(0, 1fr); gap: 14px; margin-bottom: 48px; }
+  .portal { min-height: 0; padding: 20px 20px 18px; }
+  .portal__top { margin-bottom: 18px; }
   .command-bar { flex-direction: column; align-items: stretch; }
   .chips { flex-wrap: nowrap; overflow-x: auto; margin: -4px -16px; padding: 4px 16px; scrollbar-width: none; }
   .chips::-webkit-scrollbar { display: none; }

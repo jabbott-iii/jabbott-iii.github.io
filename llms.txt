@@ -4,6 +4,7 @@ permalink: /llms.txt
 sitemap: false
 ---
 {%- assign r = site.data.resume -%}
+{%- assign archived = site.data.projects | where: 'status', 'Archived' -%}
 # {{ site.title }}
 
 > {{ site.url | remove: 'https://' }} is the engineering log of {{ r.name }}: {{ r.experience[0].role }} at {{ r.experience[0].org }}, software engineer (B.S. Software Engineering, Western Governors University, 2026) and U.S. Marine Corps veteran. It holds release notes, project updates and open-source work on Go, Rust and Kotlin tools.
@@ -19,9 +20,14 @@ Key facts:
 - Location: {{ r.location }}
 - Profiles: GitHub https://github.com/{{ site.social.github }} · LinkedIn https://www.linkedin.com/in/{{ site.social.linkedin }}/ · X https://x.com/{{ site.social.x }}
 
-## Resume
+## Pages
 
+- [Home]({{ '/' | absolute_url }}): introduction, links to the resume, engineering log and deployments, and every project with a short summary
 - [Resume]({{ '/resume/' | absolute_url }}): experience, education, certifications, projects and skills
+- [Engineering log]({{ '/log/' | absolute_url }}): every post, newest first, with project filters and search
+- [Deployments]({{ '/deployments/' | absolute_url }}): live sites deployed from GitHub repositories
+
+## Resume
 
 Experience, newest first:
 {% for e in r.experience %}
@@ -30,8 +36,18 @@ Experience, newest first:
 
 ## Projects
 {% for p in site.data.projects %}
+{%- if p.status == 'Archived' %}{% continue %}{% endif %}
 - [{{ p.name }}]({{ p.repo }}): {{ p.summary }} Language: {{ p.language }}. Status: {{ p.status }}.
 {%- endfor %}
+{%- if archived.size > 0 %}
+
+## Archived projects
+
+No longer actively developed:
+{% for p in archived %}
+- [{{ p.name }}]({{ p.repo }}): {{ p.summary }} Language: {{ p.language }}.
+{%- endfor %}
+{%- endif %}
 
 ## Deployments
 

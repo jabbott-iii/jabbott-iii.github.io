@@ -8,9 +8,9 @@ layout: default
 <div class="container">
   <nav class="breadcrumbs" aria-label="Breadcrumb">
     <ol>
-      <li><a href="{{ '/' | relative_url }}">Log</a></li>
+      <li><a href="{{ '/log/' | relative_url }}">Log</a></li>
       {%- if project %}
-      <li><a href="{{ '/' | relative_url }}?project={{ project.slug }}">{{ project.name }}</a></li>
+      <li><a href="{{ '/log/' | relative_url }}?project={{ project.slug }}">{{ project.name }}</a></li>
       {%- endif %}
       <li aria-current="page">{{ page.title }}</li>
     </ol>
@@ -78,7 +78,7 @@ layout: default
           <li><a href="{{ post.url | relative_url }}">{{ post.title }}<small>{{ post.date | date: '%Y-%m-%d' }} · {{ lp.name | default: 'Log' }}</small></a></li>
           {%- endfor %}
         </ul>
-        <a class="link-arrow link-arrow--sm" href="{{ '/' | relative_url }}">Full log {% include icon.html name="arrow" %}</a>
+        <a class="link-arrow link-arrow--sm" href="{{ '/log/' | relative_url }}">Full log {% include icon.html name="arrow" %}</a>
       </section>
 
       {% include dossier.html %}

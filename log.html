@@ -1,0 +1,102 @@
+---
+layout: default
+title: Engineering Log
+description: "Release notes, project updates and open source contributions from Joseph Abbott III, software engineer and U.S. Marine Corps veteran, newest first."
+permalink: /log/
+body_class: log
+---
+<div class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{{ '/' | relative_url }}">Home</a></li>
+      <li aria-current="page">Log</li>
+    </ol>
+  </nav>
+
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">jabbott.dev</p>
+      <h1 class="section-title section-title--xl">Engineering Log</h1>
+    </div>
+    <p class="page-head__lede">Release notes, project updates and field reports from Joseph Abbott III, software engineer and U.S. Marine Corps veteran.</p>
+  </header>
+
+  <section class="hero panel panel--brackets" data-carousel aria-roledescription="carousel" aria-label="Featured posts">
+    {%- for post in site.posts limit: 4 %}
+    {%- assign h_proj = site.data.projects | where: 'slug', post.project | first %}
+    <article class="hero__slide{% if forloop.first %} is-active{% endif %}" id="hero-slide-{{ forloop.index }}" role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} of {{ forloop.length }}"{% unless forloop.first %} hidden{% endunless %}>
+      <a class="hero__media" href="{{ post.url | relative_url }}" tabindex="-1" aria-hidden="true">
+        {%- if forloop.first %}{% include post-visual.html post=post loading='eager' %}{% else %}{% include post-visual.html post=post %}{% endif -%}
+      </a>
+      <div class="hero__copy">
+        <p class="kicker">{{ h_proj.name | default: 'Log' }} <span class="kicker__sep">//</span> {{ post.kind | default: 'Entry' }}</p>
+        <h2 class="hero__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+        <p class="hero__text">{{ post.description | default: post.excerpt | strip_html | normalize_whitespace | truncate: 220 }}</p>
+        <a class="link-arrow" href="{{ post.url | relative_url }}">Read transmission {% include icon.html name="arrow" %}<span class="sr-only">: {{ post.title }}</span></a>
+      </div>
+    </article>
+    {%- endfor %}
+    <div class="hero__bars" role="tablist" aria-label="Choose a featured post">
+      {%- for post in site.posts limit: 4 %}
+      <button class="hero__bar{% if forloop.first %} is-active{% endif %}" type="button" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="hero-slide-{{ forloop.index }}" aria-label="{{ post.title | escape }}"><span></span></button>
+      {%- endfor %}
+    </div>
+  </section>
+
+  <div class="command-bar panel" role="search">
+    <div class="chips" role="group" aria-label="Filter by project">
+      <button class="chip is-active" type="button" data-filter="all" aria-pressed="true">All <span class="chip__count">{{ site.posts | size }}</span></button>
+      {%- for p in site.data.projects %}
+      {%- assign p_count = site.posts | where: 'project', p.slug | size %}
+      {%- if p_count > 0 %}
+      <button class="chip" type="button" data-filter="{{ p.slug }}" aria-pressed="false">{{ p.name }} <span class="chip__count">{{ p_count }}</span></button>
+      {%- endif %}
+      {%- endfor %}
+    </div>
+    <label class="search">
+      <span class="sr-only">Search the log</span>
+      <input type="search" placeholder="Search the log" autocomplete="off" data-search>
+      {% include icon.html name="search" %}
+    </label>
+  </div>
+
+  <div class="layout">
+    <section class="feed" aria-labelledby="feed-title">
+      <div class="section-head">
+        <h2 class="section-title" id="feed-title">Latest transmissions</h2>
+      </div>
+      <div class="card-grid" data-cards>
+        {%- for post in site.posts %}
+        {% include post-card.html post=post %}
+        {%- endfor %}
+      </div>
+      <p class="empty panel" data-empty hidden>No transmissions match that filter. <button class="link-button" type="button" data-reset>Show everything</button></p>
+      <div class="load-more">
+        <button class="btn btn--slate" type="button" data-more hidden>Load older transmissions</button>
+      </div>
+    </section>
+
+    <aside class="sidebar" aria-label="About and links">
+      {% include dossier.html %}
+
+      <section class="side-panel panel" aria-labelledby="deploy-side-title">
+        <h2 class="side-panel__title" id="deploy-side-title">Live deployments</h2>
+        <ul class="deploy-list" data-deploy-list>
+          {%- for d in site.data.deployments %}
+          {% include deployment-item.html d=d %}
+          {%- endfor %}
+        </ul>
+        <a class="link-arrow link-arrow--sm" href="{{ '/deployments/' | relative_url }}">All deployments {% include icon.html name="arrow" %}</a>
+      </section>
+
+      <section class="side-panel panel" aria-labelledby="projects-title">
+        <h2 class="side-panel__title" id="projects-title">Projects</h2>
+        <ul class="list-rows">
+          {%- for p in site.data.projects %}
+          <li><a href="{{ p.repo }}" rel="noopener">{{ p.name }}<small>{{ p.language }} · {{ p.status }}</small></a></li>
+          {%- endfor %}
+        </ul>
+      </section>
+    </aside>
+  </div>
+</div>

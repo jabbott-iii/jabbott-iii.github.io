@@ -7,12 +7,13 @@ Engineering log, resume and deployment hub for Joseph Abbott III, served by GitH
 
 | Path | What it is |
 | --- | --- |
-| `index.html` | Landing page: featured-post carousel, project filters, search, newest-first post grid |
-| `_layouts/post.html` | Individual post page (same look as the landing page) |
+| `index.html` | Landing page: greeting, Resume / Log / Deployments / TBD tiles, Projects and Archive columns |
+| `log.html` | `/log/`, the engineering log: featured-post carousel, project filters, search, newest-first post grid |
+| `_layouts/post.html` | Individual post page (same look as the log) |
 | `resume.html` | `/resume/`, built from `_data/resume.yml` |
 | `deployments.html` | `/deployments/`, every site deployed from a repository |
 | `_includes/seo.html` | Title, description, canonical, Open Graph, Twitter and JSON-LD for every page |
-| `_data/projects.yml` | Projects that posts, the resume and `llms.txt` refer to |
+| `_data/projects.yml` | Projects listed on the home page and referred to by posts and `llms.txt` |
 | `_data/deployments.yml` | Deployed sites listed in the Deployments menu and page |
 | `assets/css/style.css`, `assets/js/site.js` | All styling and behaviour |
 | `robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt` | Crawler and answer-engine files, generated from the data above |
@@ -36,6 +37,18 @@ image: https://…           # optional; otherwise the first image in the post, 
 The layout is applied automatically. A leading `# Heading` in the post is shown as the post's
 sub-headline, so the page keeps a single `<h1>`.
 
+## Projects and the archive
+
+The home page lists every project in `_data/projects.yml`, in file order, with its summary, status
+and links to the repository and its log entries. To archive a project, set `status: Archived`: it
+moves from the Projects column to the Archive column, and `llms.txt` lists it under
+"Archived projects".
+
+The fourth home page tile is a placeholder that says TBD. To use it, copy one of the other three
+tiles in `index.html` over it and change the link, icon and text.
+
+Links from before the log moved to `/log/` (`/?project=…` and `/?q=…`) are forwarded to `/log/`.
+
 ## Deployments button
 
 The header's **Deployments** menu lists `_data/deployments.yml`. When it opens it also asks the
@@ -54,7 +67,8 @@ profile. When LinkedIn changes, update the matching entries and the `synced` dat
 ## SEO and GEO
 
 Every page gets a title, description, canonical URL on `jabbott.dev`, Open Graph and Twitter
-cards, and one JSON-LD graph: `WebSite` and `Person` everywhere, plus `Blog` (home),
+cards, and one JSON-LD graph: `WebSite` and `Person` everywhere, plus `WebPage` with the project
+list (home), `Blog` (`/log/`),
 `BlogPosting` + `BreadcrumbList` (posts), `ProfilePage` (resume) and `CollectionPage` (deployments).
 For generative engines, `robots.txt` explicitly allows the major AI crawlers, `llms.txt` gives a
 plain-text summary with links to every page, project and deployment, and `llms-full.txt` carries

@@ -121,7 +121,7 @@
         "dateModified": "{{ seo_modified }}",
         "author": { "@id": "{{ seo_base }}/#person" },
         "publisher": { "@id": "{{ seo_base }}/#person" },
-        "isPartOf": { "@id": "{{ seo_base }}/#blog" },
+        "isPartOf": { "@id": "{{ seo_base }}/log/#blog" },
         "inLanguage": {{ site.lang | jsonify }},
         "wordCount": {{ page.content | strip_html | number_of_words }}{% if seo_project %},
         "articleSection": {{ seo_project.name | jsonify }},
@@ -138,17 +138,36 @@
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Engineering Log", "item": "{{ seo_base }}/" },{% if seo_project %}
-          { "@type": "ListItem", "position": 2, "name": {{ seo_project.name | jsonify }}, "item": "{{ seo_base }}/?project={{ seo_project.slug }}" },
+          { "@type": "ListItem", "position": 1, "name": "Engineering Log", "item": "{{ seo_base }}/log/" },{% if seo_project %}
+          { "@type": "ListItem", "position": 2, "name": {{ seo_project.name | jsonify }}, "item": "{{ seo_base }}/log/?project={{ seo_project.slug }}" },
           { "@type": "ListItem", "position": 3, "name": {{ page.title | jsonify }}, "item": "{{ seo_url }}" }{% else %}
           { "@type": "ListItem", "position": 2, "name": {{ page.title | jsonify }}, "item": "{{ seo_url }}" }{% endif %}
         ]
       }
 {%- elsif page.url == '/' %}
       {
-        "@type": "Blog",
-        "@id": "{{ seo_base }}/#blog",
+        "@type": "WebPage",
+        "@id": "{{ seo_base }}/#home",
         "url": "{{ seo_base }}/",
+        "name": {{ seo_title | jsonify }},
+        "description": {{ seo_desc | jsonify }},
+        "inLanguage": {{ site.lang | jsonify }},
+        "isPartOf": { "@id": "{{ seo_base }}/#website" },
+        "about": { "@id": "{{ seo_base }}/#person" },
+        "significantLink": ["{{ seo_base }}/resume/", "{{ seo_base }}/log/", "{{ seo_base }}/deployments/"],
+        "mainEntity": {
+          "@type": "ItemList",
+          "name": "Projects",
+          "itemListElement": [{% for p in site.data.projects %}
+            { "@type": "ListItem", "position": {{ forloop.index }}, "item": { "@type": "SoftwareSourceCode", "name": {{ p.name | jsonify }}, "codeRepository": {{ p.repo | jsonify }}, "programmingLanguage": {{ p.language | jsonify }}, "description": {{ p.summary | jsonify }}, "creativeWorkStatus": {{ p.status | jsonify }}, "author": { "@id": "{{ seo_base }}/#person" } } }{% unless forloop.last %},{% endunless %}{% endfor %}
+          ]
+        }
+      }
+{%- elsif page.url == '/log/' %}
+      {
+        "@type": "Blog",
+        "@id": "{{ seo_base }}/log/#blog",
+        "url": "{{ seo_base }}/log/",
         "name": "Engineering Log",
         "description": {{ seo_desc | jsonify }},
         "inLanguage": {{ site.lang | jsonify }},

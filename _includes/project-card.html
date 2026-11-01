@@ -1,0 +1,16 @@
+{%- comment -%}
+  One project from _data/projects.yml, for the home page's Projects and Archive columns.
+{%- endcomment -%}
+{%- assign pc = include.project -%}
+{%- assign pc_posts = site.posts | where: 'project', pc.slug | size -%}
+<li class="project{% if pc.status == 'Archived' %} project--archived{% endif %}" data-lang="{{ pc.language | default: 'none' | downcase }}">
+  <p class="project__meta"><span class="project__lang">{{ pc.language }}</span><span class="status" data-status="{{ pc.status | slugify }}">{{ pc.status }}</span></p>
+  <h3 class="project__name">{{ pc.name }}</h3>
+  <p class="project__summary">{{ pc.summary }}</p>
+  <div class="project__links">
+    <a class="btn btn--ghost btn--sm" href="{{ pc.repo }}" rel="noopener" target="_blank">{% include icon.html name="github" %}<span>Repository</span><span class="sr-only"> for {{ pc.name }} on GitHub (opens in a new tab)</span></a>
+    {%- if pc_posts > 0 %}
+    <a class="btn btn--slate btn--sm" href="{{ '/log/' | relative_url }}?project={{ pc.slug }}">{% include icon.html name="log" %}<span>Log · {{ pc_posts }}</span><span class="sr-only"> entries for {{ pc.name }}</span></a>
+    {%- endif %}
+  </div>
+</li>

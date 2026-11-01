@@ -19,6 +19,15 @@
     return node;
   };
 
+  // ---------- Old log links: the log moved from / to /log/ ----------
+  if (document.body.classList.contains('page--home')) {
+    const legacy = new URLSearchParams(location.search);
+    if (legacy.has('project') || legacy.has('q')) {
+      location.replace(new URL(`log/${location.search}${location.hash}`, location.href).href);
+      return;
+    }
+  }
+
   // ---------- Mobile navigation ----------
   const navToggle = document.querySelector('[data-nav-toggle]');
   const nav = document.getElementById('site-nav');
