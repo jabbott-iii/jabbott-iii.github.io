@@ -33,6 +33,10 @@
           </div>
         </div>
 
+        <a class="btn btn--amber{% if page.url == '/' %} is-current{% endif %}" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>
+          {% include icon.html name="home" %}
+          <span>Home</span>
+        </a>
         <a class="btn btn--amber{% if page.url == '/log/' or page.collection == 'posts' %} is-current{% endif %}" href="{{ '/log/' | relative_url }}"{% if page.url == '/log/' %} aria-current="page"{% endif %}>
           {% include icon.html name="log" %}
           <span>Log</span>

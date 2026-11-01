@@ -1374,7 +1374,8 @@ a.pager__link:hover { background: #1a2023; color: var(--teal-hi); }
   .sidebar { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
 }
 
-@media (max-width: 900px) {
+/* Five header buttons no longer fit beside the brand below about 990px. */
+@media (max-width: 1024px) {
   .nav-toggle { display: inline-grid; place-items: center; }
   .site-nav {
     position: absolute; left: 0; right: 0; top: 100%;
@@ -1389,7 +1390,9 @@ a.pager__link:hover { background: #1a2023; color: var(--teal-hi); }
   .site-nav .btn { width: 100%; justify-content: flex-start; height: 46px; }
   .deploy__toggle .deploy__chevron { margin-left: auto; }
   .deploy__panel { position: static; width: auto; margin-top: 10px; box-shadow: none; }
+}
 
+@media (max-width: 900px) {
   .hero__slide { grid-template-columns: minmax(0, 1fr); }
   .page-head { flex-direction: column; align-items: flex-start; padding-top: 32px; }
   .resume__cols { grid-template-columns: minmax(0, 1fr); }
