@@ -5,21 +5,21 @@
   name: Munus
   repo: https://github.com/jabbott-iii/Munus
   language: Go
-  status: Production maintenance
+  status: Archived
   summary: Terminal-first task manager with a Bubble Tea TUI and Cobra CLI, SQLite storage, tags, relative deadlines and import/export.
 
 - slug: cryptare
   name: Cryptare
   repo: https://github.com/jabbott-iii/Cryptare
   language: Go
-  status: Production maintenance
+  status: Archived
   summary: File encryption and compression TUI/CLI using AES-256-GCM and Argon2id, with a password-protected key store and signed releases.
 
 - slug: salus
   name: Salus
   repo: https://github.com/jabbott-iii/Salus
   language: Go
-  status: Production maintenance
+  status: Archived
   summary: Environment health checker for disk, memory, CPU, Docker, Kubernetes, services, certificates and misconfigurations with PASS/WARN/FAIL reporting.
 
 - slug: denarii-dolor
@@ -36,11 +36,32 @@
   status: In development
   summary: Rust game engine and rendering framework with an ECS, cross-platform platform and FFI layers, asset pipelines and a deterministic runtime.
 
+- slug: tidepool
+  name: Tidepool
+  repo: https://github.com/jabbott-iii/Tidepool
+  language: Rust
+  status: In development
+  summary: Zero-dependency IDE and code editor with a native GUI in the jabbott.dev style, a Vim-style terminal UI, first-class Rust and Markdown, Android and iOS builds, and pluggable AI agents.
+
+- slug: hardshelldb
+  name: hardshellDB
+  repo: https://github.com/jabbott-iii/hardshellDB
+  language: Rust
+  status: In development
+  summary: All-in-one SQL database built with no third-party crates, usable as an embedded library, an interactive shell or a PostgreSQL wire-protocol server, with serializable transactions in a single file.
+
+- slug: softshelldb
+  name: softshellDB
+  repo: https://github.com/jabbott-iii/softshellDB
+  language: Rust
+  status: In development
+  summary: "All-in-one embedded NoSQL database built with no third-party crates: key-value, documents, graph, time-series, full-text and vector search in one crash-safe transactional engine."
+
 - slug: capsus
   name: Capsus
   repo: https://github.com/jabbott-iii/Capsus
   language: Go
-  status: In development
+  status: Archived
   summary: CLI toolbox that bundles every command-line tool I have built into one binary.
 
 - slug: vagor
