@@ -60,43 +60,18 @@ body_class: log
     </label>
   </div>
 
-  <div class="layout">
-    <section class="feed" aria-labelledby="feed-title">
-      <div class="section-head">
-        <h2 class="section-title" id="feed-title">Latest transmissions</h2>
-      </div>
-      <div class="card-grid" data-cards>
-        {%- for post in site.posts %}
-        {% include post-card.html post=post %}
-        {%- endfor %}
-      </div>
-      <p class="empty panel" data-empty hidden>No transmissions match that filter. <button class="link-button" type="button" data-reset>Show everything</button></p>
-      <div class="load-more">
-        <button class="btn btn--slate" type="button" data-more hidden>Load older transmissions</button>
-      </div>
-    </section>
-
-    <aside class="sidebar" aria-label="About and links">
-      {% include dossier.html %}
-
-      <section class="side-panel panel" aria-labelledby="deploy-side-title">
-        <h2 class="side-panel__title" id="deploy-side-title">Live deployments</h2>
-        <ul class="deploy-list" data-deploy-list>
-          {%- for d in site.data.deployments %}
-          {% include deployment-item.html d=d %}
-          {%- endfor %}
-        </ul>
-        <a class="link-arrow link-arrow--sm" href="{{ '/deployments/' | relative_url }}">All deployments {% include icon.html name="arrow" %}</a>
-      </section>
-
-      <section class="side-panel panel" aria-labelledby="projects-title">
-        <h2 class="side-panel__title" id="projects-title">Projects</h2>
-        <ul class="list-rows">
-          {%- for p in site.data.projects %}
-          <li><a href="{{ p.repo }}" rel="noopener">{{ p.name }}<small>{{ p.language }} · {{ p.status }}</small></a></li>
-          {%- endfor %}
-        </ul>
-      </section>
-    </aside>
-  </div>
+  <section class="feed" aria-labelledby="feed-title">
+    <div class="section-head">
+      <h2 class="section-title" id="feed-title">Latest transmissions</h2>
+    </div>
+    <div class="card-grid" data-cards>
+      {%- for post in site.posts %}
+      {% include post-card.html post=post %}
+      {%- endfor %}
+    </div>
+    <p class="empty panel" data-empty hidden>No transmissions match that filter. <button class="link-button" type="button" data-reset>Show everything</button></p>
+    <div class="load-more">
+      <button class="btn btn--slate" type="button" data-more hidden>Load older transmissions</button>
+    </div>
+  </section>
 </div>
