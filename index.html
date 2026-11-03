@@ -14,8 +14,8 @@ body_class: home
   <section class="welcome" aria-labelledby="welcome-title">
     <span class="hex-avatar hex-avatar--lg"><img src="{{ site.avatar }}&amp;s=240" alt="Portrait of {{ r.name }}" width="112" height="112"></span>
     <div class="welcome__copy">
-      <p class="kicker">Welcome aboard <span class="kicker__sep">//</span> jabbott.dev</p>
-      <h1 class="welcome__title" id="welcome-title">Welcome to my software engineering site!</h1>
+      <p class="kicker">Landing Zone <span class="kicker__sep">//</span> jabbott.dev</p>
+      <h1 class="welcome__title" id="welcome-title">Welcome aboard!</h1>
       <p class="welcome__text">I’m a software engineer and U.S. Marine Corps veteran, and this is where I keep my resume, engineering logs, the sites I have deployed, and launched products. Thank you for your time.</p>
     </div>
   </section>
@@ -29,7 +29,7 @@ body_class: home
           <span class="portal__icon">{% include icon.html name="id" %}</span>
         </div>
         <h2 class="portal__title"><a href="{{ '/resume/' | relative_url }}">Resume</a></h2>
-        <p class="portal__text">Experience, education, certifications and skills, synced from LinkedIn and ready to print.</p>
+        <p class="portal__text">Experience, education, certifications, and skills. Synced from LinkedIn and ready to print.</p>
         <p class="portal__meta"><span>Synced {{ r.synced | date: '%Y.%m.%d' }}</span>{% include icon.html name="arrow" class="portal__arrow" %}</p>
       </li>
 
@@ -40,7 +40,7 @@ body_class: home
           <span class="portal__icon">{% include icon.html name="log" %}</span>
         </div>
         <h2 class="portal__title"><a href="{{ '/log/' | relative_url }}">Log</a></h2>
-        <p class="portal__text">Release notes, project updates and open source contributions, newest first, with filters and search.</p>
+        <p class="portal__text">Release notes, project updates, and open source contributions. Newest first, with filters and search.</p>
         <p class="portal__meta"><span>{{ post_count }} {% if post_count == 1 %}entry{% else %}entries{% endif %} · {{ latest.date | date: '%Y.%m.%d' }}</span>{% include icon.html name="arrow" class="portal__arrow" %}</p>
       </li>
 
@@ -51,7 +51,7 @@ body_class: home
           <span class="portal__icon">{% include icon.html name="satellite" %}</span>
         </div>
         <h2 class="portal__title"><a href="{{ '/deployments/' | relative_url }}">Deployments</a></h2>
-        <p class="portal__text">Live sites built and served straight from my GitHub repositories, with links to each site and its source.</p>
+        <p class="portal__text">Live sites built and served straight from my GitHub repositories. Including links to each site and its source.</p>
         <p class="portal__meta"><span><span class="status-dot" aria-hidden="true"></span> {{ deploy_count }} live {% if deploy_count == 1 %}site{% else %}sites{% endif %}</span>{% include icon.html name="arrow" class="portal__arrow" %}</p>
       </li>
 
