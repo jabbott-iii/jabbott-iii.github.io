@@ -1,5 +1,5 @@
-title: Joseph Abbott III
-tagline: Software Engineer & Marine Veteran
+title: "Joseph Abbott III"
+tagline: "Software Engineer & Marine Veteran"
 description: >-
   Engineering log of Joseph Abbott III, software engineer and U.S. Marine Corps
   veteran: release notes and project updates.
@@ -9,7 +9,7 @@ url: "https://jabbott.dev"
 baseurl: ""
 
 author:
-  name: Joseph Abbott III
+  name: "Joseph Abbott III"
   url: https://jabbott.dev/resume/
 
 social:

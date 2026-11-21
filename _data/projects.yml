@@ -6,49 +6,49 @@
   repo: https://github.com/jabbott-iii/Munus
   language: Go
   status: Archived
-  summary: Terminal-first task manager with a Bubble Tea TUI and Cobra CLI, SQLite storage, tags, relative deadlines and import/export.
+  summary: "Terminal-first task manager with a Bubble Tea TUI and Cobra CLI, SQLite storage, tags, relative deadlines and import/export."
 
 - slug: cryptare
   name: Cryptare
   repo: https://github.com/jabbott-iii/Cryptare
   language: Go
   status: Archived
-  summary: File encryption and compression TUI/CLI using AES-256-GCM and Argon2id, with a password-protected key store and signed releases.
+  summary: "File encryption and compression TUI/CLI using AES-256-GCM and Argon2id, with a password-protected key store and signed releases."
 
 - slug: salus
   name: Salus
   repo: https://github.com/jabbott-iii/Salus
   language: Go
   status: Archived
-  summary: Environment health checker for disk, memory, CPU, Docker, Kubernetes, services, certificates and misconfigurations with PASS/WARN/FAIL reporting.
+  summary: "Environment health checker for disk, memory, CPU, Docker, Kubernetes, services, certificates and misconfigurations with PASS/WARN/FAIL reporting."
 
 - slug: denarii-dolor
   name: Denarii Dolor
   repo: https://github.com/jabbott-iii/DenariiDolor
   language: Kotlin
   status: Active
-  summary: Android personal finance app that keeps an encrypted (SQLCipher) ledger on the phone, with no account, ads, analytics or internet access.
+  summary: "Android personal finance app that keeps an encrypted (SQLCipher) ledger on the phone, with no account, ads, analytics or internet access."
 
 - slug: nadir
   name: Nadir
   repo: https://github.com/jabbott-iii/Nadir
   language: Rust
   status: In development
-  summary: Rust game engine and rendering framework with an ECS, cross-platform platform and FFI layers, asset pipelines and a deterministic runtime.
+  summary: "Rust game engine and rendering framework with an ECS, cross-platform platform and FFI layers, asset pipelines and a deterministic runtime."
 
 - slug: tidepool
   name: Tidepool
   repo: https://github.com/jabbott-iii/Tidepool
   language: Rust
   status: In development
-  summary: Zero-dependency IDE and code editor with a native GUI in the jabbott.dev style, a Vim-style terminal UI, first-class Rust and Markdown, Android and iOS builds, and pluggable AI agents.
+  summary: "Zero-dependency IDE and code editor with a native GUI in the jabbott.dev style, a Vim-style terminal UI, first-class Rust and Markdown, Android and iOS builds, and pluggable AI agents."
 
 - slug: hardshelldb
   name: hardshellDB
   repo: https://github.com/jabbott-iii/hardshellDB
   language: Rust
   status: In development
-  summary: All-in-one SQL database built with no third-party crates, usable as an embedded library, an interactive shell or a PostgreSQL wire-protocol server, with serializable transactions in a single file.
+  summary: "All-in-one SQL database built with no third-party crates, usable as an embedded library, an interactive shell or a PostgreSQL wire-protocol server, with serializable transactions in a single file."
 
 - slug: softshelldb
   name: softshellDB
@@ -62,18 +62,18 @@
   repo: https://github.com/jabbott-iii/Capsus
   language: Go
   status: Archived
-  summary: CLI toolbox that bundles every command-line tool I have built into one binary.
+  summary: "CLI toolbox that bundles every command-line tool I have built into one binary."
 
 - slug: vagor
   name: Vagor
   repo: https://github.com/jabbott-iii/Vagor
   language: Kotlin
   status: In development
-  summary: Vacation planning app for Android.
+  summary: "Vacation planning app for Android."
 
 - slug: open-source
   name: Open Source
   repo: https://github.com/jabbott-iii/open-source-project-contributions
   language: Various
   status: Ongoing
-  summary: Merged pull requests to s3-orchestrator, AegisFlow and InfraCanvas.
+  summary: "Merged pull requests to s3-orchestrator, AegisFlow and InfraCanvas."

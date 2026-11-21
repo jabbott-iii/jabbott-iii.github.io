@@ -7,7 +7,7 @@
   repo: jabbott-iii/Nadir
   url: https://jabbott.dev/Nadir/
   language: Rust
-  summary: Project documentation for Nadir, a high-performance Rust game engine and rendering framework.
+  summary: "Project documentation for Nadir, a high-performance Rust game engine and rendering framework."
 
 - name: Tidepool
   repo: jabbott-iii/Tidepool
