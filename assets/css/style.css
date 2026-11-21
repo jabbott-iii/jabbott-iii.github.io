@@ -1211,7 +1211,7 @@ a.pager__link:hover { background: #1a2023; color: var(--teal-hi); }
 
 .prose hr { height: 1px; margin: 2.2em 0; border: 0; background: linear-gradient(90deg, var(--teal), transparent); }
 
-/* Syntax colours for Rouge output */
+/* Syntax colors for Rouge output */
 .highlight .c, .highlight .c1, .highlight .cm, .highlight .cs, .highlight .cp { color: #6f7d82; font-style: italic; }
 .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt, .highlight .nb { color: var(--teal); }
 .highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx { color: #e9c46a; }

@@ -15,7 +15,7 @@ Engineering log, resume and deployment hub for Joseph Abbott III, served by GitH
 | `_includes/seo.html` | Title, description, canonical, Open Graph, Twitter and JSON-LD for every page |
 | `_data/projects.yml` | Projects listed on the home page and referred to by posts and `llms.txt` |
 | `_data/deployments.yml` | Deployed sites listed in the Deployments menu and page |
-| `assets/css/style.css`, `assets/js/site.js` | All styling and behaviour |
+| `assets/css/style.css`, `assets/js/site.js` | All styling and behavior |
 | `robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt` | Crawler and answer-engine files, generated from the data above |
 
 ## Writing a post
