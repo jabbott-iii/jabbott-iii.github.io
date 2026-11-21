@@ -12,7 +12,7 @@ description: "Pull request #21 to InfraCanvas is merged: the open source dashboa
 
 My third pull request to [InfraCanvas](https://github.com/bytestrix/InfraCanvas), the live Docker and Kubernetes infrastructure map, was merged on October 5. It closes two issues in the Next.js dashboard (Next.js is a framework for React web apps): [#16](https://github.com/bytestrix/InfraCanvas/issues/16), which asked for dedicated Machines and Clusters pages, and [#18](https://github.com/bytestrix/InfraCanvas/issues/18), which asked to clear the React hook lint warnings printed on every build. (Hooks are React functions, such as `useMemo`, that let a component hold state, cache values, or run effects: code that runs after rendering.)
 
-<img width="1280" height="820" alt="The new Machines page in InfraCanvas, dark theme" src="https://github.com/user-attachments/assets/7a4738f9-8e28-4b70-a3d5-5923dc8f90eb" />
+<img width="1280" height="820" alt="InfraCanvas Machines page in the dark theme: cards for seven machines, five online, each showing its status, resource count, scope, and an Open link" src="https://github.com/user-attachments/assets/7a4738f9-8e28-4b70-a3d5-5923dc8f90eb" />
 
 ## The problem
 
@@ -32,7 +32,7 @@ Separately, `npm run build` printed six `react-hooks/exhaustive-deps` and `no-im
 
 A long hostname or context name stretched the sidebar past its 200px column. That pushed the read-only/read-write and remove controls out of view, and on mobile the closed navigation drawer covered the menu button. The sidebar is now pinned to its column (`flex: 1` with `min-width: 0`), so a long name no longer pushes the controls out of view. (A flex item normally can't shrink below its content's minimum width; `min-width: 0` removes that floor.)
 
-<img width="1280" height="820" alt="The new Clusters page in InfraCanvas, dark theme" src="https://github.com/user-attachments/assets/347dea6c-73c9-4cdd-acbd-bf6096800650" />
+<img width="1280" height="820" alt="InfraCanvas Clusters page in the dark theme: cards for seven clusters, six online, each showing its context, API server, resource count, and controls" src="https://github.com/user-attachments/assets/347dea6c-73c9-4cdd-acbd-bf6096800650" />
 
 ## A build with zero lint warnings (#18)
 
