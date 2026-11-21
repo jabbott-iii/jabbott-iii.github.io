@@ -1,7 +1,7 @@
 {%- assign r = site.data.resume -%}
 <section class="side-panel panel panel--brackets dossier" aria-labelledby="dossier-title">
   <div class="dossier__top">
-    <span class="hex-avatar"><img src="{{ site.avatar }}&amp;s=160" alt="Portrait of {{ r.name }}" width="72" height="72" loading="lazy"></span>
+    <span class="hex-avatar"><img src="{{ site.avatar }}&amp;s=160" alt="Portrait of {{ r.name | escape }}" width="72" height="72" loading="lazy"></span>
     <div>
       <p class="kicker kicker--sm">Dossier</p>
       <h2 class="dossier__name" id="dossier-title">{{ r.name }}</h2>

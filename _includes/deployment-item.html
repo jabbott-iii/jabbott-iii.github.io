@@ -4,5 +4,5 @@
                   <span class="deploy-item__name">{{ include.d.name }}</span>
                   <span class="deploy-item__host">{{ include.d.url | remove: 'https://' | remove: 'http://' }}</span>
                 </a>
-                <a class="deploy-item__repo" href="https://github.com/{{ include.d.repo }}" target="_blank" rel="noopener" aria-label="{{ include.d.name }} repository on GitHub">{% include icon.html name="github" %}</a>
+                <a class="deploy-item__repo" href="https://github.com/{{ include.d.repo }}" target="_blank" rel="noopener" aria-label="{{ include.d.name | escape }} repository on GitHub">{% include icon.html name="github" %}</a>
               </li>

@@ -11,7 +11,7 @@
 {%- endif -%}
 {%- assign v_proj = site.data.projects | where: 'slug', v_post.project | first -%}
 {%- if v_img -%}
-<img class="visual__img" src="{{ v_img }}" alt="" loading="{{ include.loading | default: 'lazy' }}" decoding="async">
+<img class="visual__img" src="{{ v_img }}" alt="" width="640" height="360" loading="{{ include.loading | default: 'lazy' }}" decoding="async">
 {%- else -%}
 <div class="visual__plate" data-lang="{{ v_proj.language | default: 'none' | downcase }}">
   <span class="visual__ring"></span>

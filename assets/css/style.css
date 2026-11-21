@@ -188,7 +188,7 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; }
 .brand__text { display: flex; flex-direction: column; line-height: 1; }
 .brand__name {
   font-size: 18px; font-weight: 600;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.28em; text-transform: uppercase;
 }
 .brand__tld { color: var(--teal); letter-spacing: 0.14em; }
 .brand__sub {

@@ -33,14 +33,14 @@
 {%- assign seo_modified = page.last_modified_at | default: page.date | date_to_xmlschema -%}
   <title>{{ seo_title | strip_html | strip }}</title>
   <meta name="description" content="{{ seo_desc | escape }}">
-  <meta name="author" content="{{ site.author.name }}">
+  <meta name="author" content="{{ site.author.name | escape }}">
   <meta name="robots" content="{% if page.sitemap == false %}noindex, follow{% else %}index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1{% endif %}">
   <link rel="canonical" href="{{ seo_url }}">
   <link rel="author" href="{{ '/resume/' | absolute_url }}">
   <link rel="me" href="https://github.com/{{ site.social.github }}">
   <link rel="me" href="https://www.linkedin.com/in/{{ site.social.linkedin }}/">
   <link rel="me" href="https://x.com/{{ site.social.x }}">
-  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:site_name" content="{{ site.title | escape }}">
   <meta property="og:locale" content="{{ site.locale | default: 'en_US' }}">
   <meta property="og:type" content="{% if seo_is_post %}article{% elsif page.url == '/resume/' %}profile{% else %}website{% endif %}">
   <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
@@ -53,10 +53,10 @@
   <meta property="article:modified_time" content="{{ seo_modified }}">
   <meta property="article:author" content="{{ site.author.url }}">
   {%- if seo_project %}
-  <meta property="article:section" content="{{ seo_project.name }}">
+  <meta property="article:section" content="{{ seo_project.name | escape }}">
   {%- endif %}
   {%- if page.kind %}
-  <meta property="article:tag" content="{{ page.kind }}">
+  <meta property="article:tag" content="{{ page.kind | escape }}">
   {%- endif %}
 {%- endif %}
 {%- if page.url == '/resume/' %}

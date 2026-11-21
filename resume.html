@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Resume
-description: "Resume of Joseph Abbott III: Senior Field Engineer at Lockheed Martin, U.S. Marine Corps veteran and software engineer (B.S., WGU) with AWS, CompTIA and ITIL certifications."
+description: "Resume of Joseph Abbott III: Senior Field Engineer at Lockheed Martin, U.S. Marine Corps veteran and software engineer (B.S., WGU) with AWS, CompTIA, and ITIL certifications."
 permalink: /resume/
 body_class: resume
 ---
@@ -22,7 +22,7 @@ body_class: resume
 
   <article class="resume panel panel--brackets">
     <header class="resume__header">
-      <span class="hex-avatar hex-avatar--lg"><img src="{{ site.avatar }}&amp;s=240" alt="Portrait of {{ r.name }}" width="112" height="112"></span>
+      <span class="hex-avatar hex-avatar--lg"><img src="{{ site.avatar }}&amp;s=240" alt="Portrait of {{ r.name | escape }}" width="112" height="112"></span>
       <div class="resume__id">
         <p class="kicker">Personnel file</p>
         <h1 class="resume__name">{{ r.name }}</h1>
@@ -171,7 +171,7 @@ body_class: resume
     </div>
 
     <footer class="resume__source">
-      Profile data from <a href="{{ r.source }}" rel="noopener">LinkedIn</a>, last synced {{ r.synced | date: '%B %-d, %Y' }}. Project details link to their GitHub repositories.
+      Profile data from <a href="{{ r.source }}" rel="noopener">LinkedIn</a>, last synced <time datetime="{{ r.synced | date: '%Y-%m-%d' }}">{{ r.synced | date: '%B %-d, %Y' }}</time>. Project details link to their GitHub repositories.
     </footer>
   </article>
 </div>

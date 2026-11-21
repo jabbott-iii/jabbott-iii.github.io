@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Engineering Log
-description: "Release notes, project updates and open source contributions from Joseph Abbott III, software engineer and U.S. Marine Corps veteran, newest first."
+description: "Release notes, project updates, and open-source contributions from Joseph Abbott III, software engineer and U.S. Marine Corps veteran, newest first."
 permalink: /log/
 body_class: log
 ---
@@ -18,19 +18,20 @@ body_class: log
       <p class="eyebrow">jabbott.dev</p>
       <h1 class="section-title section-title--xl">Engineering Log</h1>
     </div>
-    <p class="page-head__lede">Release notes, project updates and field reports from Joseph Abbott III, software engineer and U.S. Marine Corps veteran.</p>
+    <p class="page-head__lede">Release notes, project updates, and field reports from Joseph Abbott III, software engineer and U.S. Marine Corps veteran.</p>
   </header>
 
-  <section class="hero panel panel--brackets" data-carousel aria-roledescription="carousel" aria-label="Featured posts">
+  <section class="hero panel panel--brackets" data-carousel aria-roledescription="carousel" aria-labelledby="featured-title">
+    <h2 class="sr-only" id="featured-title">Featured posts</h2>
     {%- for post in site.posts limit: 4 %}
     {%- assign h_proj = site.data.projects | where: 'slug', post.project | first %}
-    <article class="hero__slide{% if forloop.first %} is-active{% endif %}" id="hero-slide-{{ forloop.index }}" role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} of {{ forloop.length }}"{% unless forloop.first %} hidden{% endunless %}>
+    <article class="hero__slide{% if forloop.first %} is-active{% endif %}" id="hero-slide-{{ forloop.index }}" role="tabpanel" aria-roledescription="slide" aria-label="{{ forloop.index }} of {{ forloop.length }}"{% unless forloop.first %} hidden{% endunless %}>
       <a class="hero__media" href="{{ post.url | relative_url }}" tabindex="-1" aria-hidden="true">
         {%- if forloop.first %}{% include post-visual.html post=post loading='eager' %}{% else %}{% include post-visual.html post=post %}{% endif -%}
       </a>
       <div class="hero__copy">
         <p class="kicker">{{ h_proj.name | default: 'Log' }} <span class="kicker__sep">//</span> {{ post.kind | default: 'Entry' }}</p>
-        <h2 class="hero__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+        <h3 class="hero__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
         <p class="hero__text">{{ post.description | default: post.excerpt | strip_html | normalize_whitespace | truncate: 220 }}</p>
         <a class="link-arrow" href="{{ post.url | relative_url }}">Read transmission {% include icon.html name="arrow" %}<span class="sr-only">: {{ post.title }}</span></a>
       </div>
@@ -53,9 +54,9 @@ body_class: log
       {%- endif %}
       {%- endfor %}
     </div>
-    <label class="search">
+    <label class="search" for="log-search">
       <span class="sr-only">Search the log</span>
-      <input type="search" placeholder="Search the log" autocomplete="off" data-search>
+      <input id="log-search" type="search" placeholder="Search the log" autocomplete="off" data-search>
       {% include icon.html name="search" %}
     </label>
   </div>

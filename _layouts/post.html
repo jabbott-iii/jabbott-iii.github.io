@@ -75,7 +75,7 @@ layout: default
             {%- if post.url == page.url or shown >= 5 -%}{%- continue -%}{%- endif -%}
             {%- assign shown = shown | plus: 1 -%}
             {%- assign lp = site.data.projects | where: 'slug', post.project | first %}
-          <li><a href="{{ post.url | relative_url }}">{{ post.title }}<small>{{ post.date | date: '%Y-%m-%d' }} · {{ lp.name | default: 'Log' }}</small></a></li>
+          <li><a href="{{ post.url | relative_url }}">{{ post.title }}<small><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%Y-%m-%d' }}</time> · {{ lp.name | default: 'Log' }}</small></a></li>
           {%- endfor %}
         </ul>
         <a class="link-arrow link-arrow--sm" href="{{ '/log/' | relative_url }}">Full log {% include icon.html name="arrow" %}</a>
