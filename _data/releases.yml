@@ -1,0 +1,13 @@
+# Production releases: apps published to the public through an app store.
+# Each entry gets a card on /market/, a count on the home page's Market tile, a line in llms.txt,
+# and structured data. `project` is a slug from _data/projects.yml, which supplies the language
+# and links the card to that project's log entries. `price` is the store's price in the US; update
+# it here when the store price changes.
+- name: Denarii Dolor
+  project: denarii-dolor
+  platform: Android
+  store: Google Play
+  store_url: https://play.google.com/store/apps/details?id=com.denariidolor
+  price: US$0.99
+  privacy: /denarii-dolor/privacy-policy/
+  summary: A personal finance app that keeps your transactions, accounts, budgets, and balances encrypted on your phone. It has no account, no ads, no analytics, and no internet access.

@@ -154,7 +154,7 @@
         "inLanguage": {{ site.lang | jsonify }},
         "isPartOf": { "@id": "{{ seo_base }}/#website" },
         "about": { "@id": "{{ seo_base }}/#person" },
-        "significantLink": ["{{ seo_base }}/resume/", "{{ seo_base }}/log/", "{{ seo_base }}/deployments/"],
+        "significantLink": ["{{ seo_base }}/resume/", "{{ seo_base }}/log/", "{{ seo_base }}/deployments/", "{{ seo_base }}/market/"],
         "mainEntity": {
           "@type": "ItemList",
           "name": "Projects",
@@ -200,6 +200,21 @@
           "@type": "ItemList",
           "itemListElement": [{% for d in site.data.deployments %}
             { "@type": "ListItem", "position": {{ forloop.index }}, "item": { "@type": "WebSite", "name": {{ d.name | jsonify }}, "url": {{ d.url | jsonify }}, "description": {{ d.summary | jsonify }}, "isBasedOn": "https://github.com/{{ d.repo }}", "author": { "@id": "{{ seo_base }}/#person" } } }{% unless forloop.last %},{% endunless %}{% endfor %}
+          ]
+        }
+      }
+{%- elsif page.url == '/market/' %}
+      {
+        "@type": "CollectionPage",
+        "@id": "{{ seo_url }}#page",
+        "url": "{{ seo_url }}",
+        "name": {{ seo_title | jsonify }},
+        "description": {{ seo_desc | jsonify }},
+        "isPartOf": { "@id": "{{ seo_base }}/#website" },
+        "mainEntity": {
+          "@type": "ItemList",
+          "itemListElement": [{% for a in site.data.releases %}
+            { "@type": "ListItem", "position": {{ forloop.index }}, "item": { "@type": "MobileApplication", "name": {{ a.name | jsonify }}, "operatingSystem": {{ a.platform | jsonify }}, "description": {{ a.summary | jsonify }}, "installUrl": {{ a.store_url | jsonify }}, "url": {{ a.store_url | jsonify }}, "author": { "@id": "{{ seo_base }}/#person" } } }{% unless forloop.last %},{% endunless %}{% endfor %}
           ]
         }
       }

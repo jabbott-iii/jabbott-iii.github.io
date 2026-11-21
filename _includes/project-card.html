@@ -10,7 +10,7 @@
   <div class="project__links">
     <a class="btn btn--ghost btn--sm" href="{{ pc.repo }}" rel="noopener" target="_blank">{% include icon.html name="github" %}<span>Repository</span><span class="sr-only"> for {{ pc.name }} on GitHub (opens in a new tab)</span></a>
     {%- if pc_posts > 0 %}
-    <a class="btn btn--slate btn--sm" href="{{ '/log/' | relative_url }}?project={{ pc.slug }}">{% include icon.html name="log" %}<span>Log · {{ pc_posts }}</span><span class="sr-only"> entries for {{ pc.name }}</span></a>
+    <a class="btn btn--slate btn--sm" href="{{ '/log/' | relative_url }}?project={{ pc.slug }}">{% include icon.html name="log" %}<span>Log · {{ pc_posts }}</span><span class="sr-only"> {% if pc_posts == 1 %}entry{% else %}entries{% endif %} for {{ pc.name }}</span></a>
     {%- endif %}
   </div>
 </li>

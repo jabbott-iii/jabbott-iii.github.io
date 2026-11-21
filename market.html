@@ -1,0 +1,67 @@
+---
+layout: default
+title: Market
+description: "Apps by Joseph Abbott III released to the public on app stores, with store links, prices, and privacy policies."
+permalink: /market/
+---
+<div class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{{ '/' | relative_url }}">Home</a></li>
+      <li aria-current="page">Market</li>
+    </ol>
+  </nav>
+
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Production releases</p>
+      <h1 class="section-title section-title--xl">Market</h1>
+    </div>
+    <p class="page-head__lede">Apps I have released to the public, with where to get them, what they cost, and how each one handles your data.</p>
+  </header>
+
+  {%- if site.data.releases.size > 0 %}
+  <ul class="release-list">
+    {%- for a in site.data.releases %}
+    {%- assign a_proj = site.data.projects | where: 'slug', a.project | first %}
+    {%- assign a_posts = site.posts | where: 'project', a.project | size %}
+    <li class="release-card panel panel--brackets">
+      <div class="release-card__media" aria-hidden="true">
+        <div class="visual__plate" data-lang="{{ a_proj.language | default: 'none' | downcase }}">
+          <span class="visual__ring"></span>
+          <span class="visual__name">{{ a.name }}</span>
+          <span class="visual__code">{{ a.platform }} · {{ a.store }}</span>
+        </div>
+      </div>
+      <div class="release-card__body">
+        <p class="kicker"><span class="status-dot" aria-hidden="true"></span> Released <span class="kicker__sep">//</span> {{ a.platform }}</p>
+        <h2 class="release-card__title">{{ a.name }}</h2>
+        <p class="release-card__text">{{ a.summary }}</p>
+        <dl class="spec release-card__spec">
+          <div><dt>Platform</dt><dd>{{ a.platform }}</dd></div>
+          <div><dt>Store</dt><dd>{{ a.store }}</dd></div>
+          <div><dt>Price</dt><dd>{{ a.price }}</dd></div>
+          {%- if a_proj.language %}
+          <div><dt>Built with</dt><dd>{{ a_proj.language }}</dd></div>
+          {%- endif %}
+        </dl>
+        <div class="btn-row">
+          <a class="btn btn--amber btn--sm" href="{{ a.store_url | escape }}" target="_blank" rel="noopener">{% include icon.html name="external" %}<span>Get it on {{ a.store }}</span><span class="sr-only"> (opens in a new tab)</span></a>
+          {%- if a.privacy %}
+          <a class="btn btn--ghost btn--sm" href="{{ a.privacy | relative_url }}">{% include icon.html name="shield" %}<span>Privacy policy</span><span class="sr-only"> for {{ a.name }}</span></a>
+          {%- endif %}
+          {%- if a_posts > 0 %}
+          <a class="btn btn--slate btn--sm" href="{{ '/log/' | relative_url }}?project={{ a.project }}">{% include icon.html name="log" %}<span>Log · {{ a_posts }}</span><span class="sr-only"> {% if a_posts == 1 %}entry{% else %}entries{% endif %} for {{ a.name }}</span></a>
+          {%- endif %}
+        </div>
+      </div>
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- else %}
+  <div class="archive-empty">
+    <p class="archive-empty__title">Nothing released yet</p>
+    <p class="archive-empty__text">Apps appear here once they are published on an app store.</p>
+  </div>
+  {%- endif %}
+</div>

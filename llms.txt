@@ -22,10 +22,11 @@ Key facts:
 
 ## Pages
 
-- [Home]({{ '/' | absolute_url }}): introduction, links to the resume, engineering log and deployments, and every project with a short summary
+- [Home]({{ '/' | absolute_url }}): introduction, links to the resume, engineering log, deployments, and market, and every project with a short summary
 - [Resume]({{ '/resume/' | absolute_url }}): experience, education, certifications, projects and skills
 - [Engineering log]({{ '/log/' | absolute_url }}): every post, newest first, with project filters and search
 - [Deployments]({{ '/deployments/' | absolute_url }}): live sites deployed from GitHub repositories
+- [Market]({{ '/market/' | absolute_url }}): apps released to the public on app stores, with store links, prices, and privacy policies
 
 ## Resume
 
@@ -48,6 +49,13 @@ No longer actively developed:
 - [{{ p.name }}]({{ p.repo }}): {{ p.summary }} Language: {{ p.language }}.
 {%- endfor %}
 {%- endif %}
+
+## Market
+
+Apps released to the public:
+{% for a in site.data.releases %}
+- [{{ a.name }}]({{ a.store_url }}): {{ a.summary }} Platform: {{ a.platform }}, on {{ a.store }} for {{ a.price }}.{% if a.privacy %} Privacy policy: {{ a.privacy | absolute_url }}{% endif %}
+{%- endfor %}
 
 ## Deployments
 

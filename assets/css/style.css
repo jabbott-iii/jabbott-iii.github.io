@@ -427,7 +427,7 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; }
 }
 .portal--resume { --accent: var(--amber); }
 .portal--deploy { --accent: var(--green); }
-.portal--tbd { --accent: var(--text-3); }
+.portal--market { --accent: var(--violet); }
 
 /* Corner brackets that open out on hover, like a targeting reticle. */
 .portal::before,
@@ -522,19 +522,19 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; }
 .portal__meta > span { display: inline-flex; align-items: center; gap: 8px; }
 .portal__arrow { color: var(--accent); transition: transform 0.2s ease; }
 
-.portal:not(.portal--tbd):hover,
+.portal:hover,
 .portal:focus-within {
   transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--accent) 55%, transparent);
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5), 0 0 36px color-mix(in srgb, var(--accent) 14%, transparent);
 }
 .portal:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
-.portal:not(.portal--tbd):hover::before,
-.portal:not(.portal--tbd):hover::after,
+.portal:hover::before,
+.portal:hover::after,
 .portal:focus-within::before,
 .portal:focus-within::after { width: 34px; height: 34px; }
-.portal:not(.portal--tbd):hover .portal__fx::after { animation: portal-scan 1.2s ease-out; }
-.portal:not(.portal--tbd):hover .portal__ghost { opacity: 0.13; transform: translate(-6px, -6px); }
+.portal:hover .portal__fx::after { animation: portal-scan 1.2s ease-out; }
+.portal:hover .portal__ghost { opacity: 0.13; transform: translate(-6px, -6px); }
 .portal:hover .portal__title a,
 .portal:focus-within .portal__title a { color: color-mix(in srgb, var(--accent) 55%, #fff); }
 .portal:hover .portal__arrow,
@@ -544,21 +544,6 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; }
   15% { opacity: 1; }
   to { opacity: 0; transform: translateY(240%); }
 }
-
-/* Placeholder tile: no link, hatched and dashed. */
-.portal--tbd {
-  border-style: dashed;
-  border-color: var(--line-2);
-  background:
-    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.022) 0 10px, transparent 10px 20px),
-    var(--panel);
-}
-.portal--tbd .portal__fx { background: none; }
-.portal--tbd .portal__title { color: var(--text-3); letter-spacing: 0.3em; }
-.portal__redacted { display: grid; gap: 9px; margin: 6px 0 22px; }
-.portal__redacted span { display: block; height: 9px; background: rgba(255, 255, 255, 0.06); }
-.portal__redacted span:nth-child(2) { width: 82%; }
-.portal__redacted span:nth-child(3) { width: 56%; }
 
 /* ---------- Home: projects and archive ---------- */
 
@@ -772,6 +757,7 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; }
 
 .visual__name {
   position: relative;
+  text-align: center;
   font-size: clamp(26px, 11cqw, 64px);
   font-weight: 700;
   line-height: 1;
@@ -1045,6 +1031,28 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; }
 .deploy-card__title { margin: 0 0 4px; font-size: 28px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 .deploy-card__url { margin: 0 0 14px; font-family: var(--mono); font-size: 13px; color: var(--teal); word-break: break-all; }
 .deploy-card__text { margin: 0 0 22px; color: var(--text-2); flex: 1; }
+
+/* ---------- Market: production releases ---------- */
+
+.release-list { display: grid; gap: 22px; margin: 0; padding: 0; list-style: none; }
+.release-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(20px, 3.2vw, 44px);
+  align-items: center;
+  padding: clamp(16px, 2.4vw, 28px);
+}
+.release-card__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--slate-2);
+  border: 1px solid var(--line);
+  container-type: inline-size;
+}
+.release-card__title { margin: 0 0 10px; font-size: 28px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.release-card__text { margin: 0 0 18px; color: var(--text-2); max-width: 58ch; }
+.release-card__spec { margin-bottom: 20px; }
 
 /* ---------- Article ---------- */
 
@@ -1415,6 +1423,7 @@ a.pager__link:hover { background: #1a2023; color: var(--teal-hi); }
 
 @media (max-width: 900px) {
   .hero__slide { grid-template-columns: minmax(0, 1fr); }
+  .release-card { grid-template-columns: minmax(0, 1fr); }
   .page-head { flex-direction: column; align-items: flex-start; padding-top: 32px; }
   .resume__cols { grid-template-columns: minmax(0, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }

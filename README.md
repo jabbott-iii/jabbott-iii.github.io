@@ -7,14 +7,16 @@ Engineering log, resume and deployment hub for Joseph Abbott III, served by GitH
 
 | Path | What it is |
 | --- | --- |
-| `index.html` | Landing page: greeting, Resume / Log / Deployments / TBD tiles, Projects and Archive columns |
+| `index.html` | Landing page: greeting, Resume / Log / Deployments / Market tiles, Projects and Archive columns |
 | `log.html` | `/log/`, the engineering log: featured-post carousel, project filters, search, newest-first post grid |
 | `_layouts/post.html` | Individual post page (same look as the log) |
 | `resume.html` | `/resume/`, built from `_data/resume.yml` |
 | `deployments.html` | `/deployments/`, every site deployed from a repository |
+| `market.html` | `/market/`, every app released to the public on an app store, built from `_data/releases.yml` |
 | `_includes/seo.html` | Title, description, canonical, Open Graph, Twitter and JSON-LD for every page |
 | `_data/projects.yml` | Projects listed on the home page and referred to by posts and `llms.txt` |
 | `_data/deployments.yml` | Deployed sites listed in the Deployments menu and page |
+| `_data/releases.yml` | Production releases listed on the Market page and counted on its home page tile |
 | `assets/css/style.css`, `assets/js/site.js` | All styling and behavior |
 | `robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt` | Crawler and answer-engine files, generated from the data above |
 
@@ -44,9 +46,6 @@ and links to the repository and its log entries. To archive a project, set `stat
 moves from the Projects column to the Archive column, and `llms.txt` lists it under
 "Archived projects".
 
-The fourth home page tile is a placeholder that says TBD. To use it, copy one of the other three
-tiles in `index.html` over it and change the link, icon and text.
-
 Links from before the log moved to `/log/` (`/?project=…` and `/?q=…`) are forwarded to `/log/`.
 
 ## Deployments button
@@ -56,6 +55,25 @@ GitHub API for any of your non-fork repositories with Pages switched on and adds
 from the file, so a new deployment shows up before the file is updated. Add an entry to the file
 to give a deployment a proper description, structured data and (for sites under `jabbott.dev`) a
 sitemap entry.
+
+## Market
+
+The fourth home page tile opens `/market/`, which lists every app released to the public on an app
+store. To add a release, add an entry to `_data/releases.yml`:
+
+```yaml
+- name: Denarii Dolor
+  project: denarii-dolor   # a slug from _data/projects.yml; supplies the language and log link
+  platform: Android
+  store: Google Play
+  store_url: https://play.google.com/store/apps/details?id=com.denariidolor
+  price: US$0.99           # the store's US price; update it when the store price changes
+  privacy: /denarii-dolor/privacy-policy/   # optional
+  summary: "One or two sentences about what the app does."
+```
+
+The entry gets a card on `/market/`, a line in `llms.txt`, and structured data, and the tile's count
+goes up by one.
 
 ## Resume
 
