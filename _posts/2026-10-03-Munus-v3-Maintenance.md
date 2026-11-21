@@ -28,11 +28,11 @@ It has been a little over two months since v1.0, and six releases since v2.0 (v2
 
 - **Data Storage & Export**
   - Tasks now live in a per-user data directory, so you see the same tasks wherever you run `munus`
-  - Export schema v2 keeps status and tags; v1 files still import
+  - Export schema v2 (the layout of an export file) keeps status and tags; v1 files still import
   - Import from a file or standard input, merge or replace, with `--dry-run`, `--backup` and `--strict`
-  - Several `munus` processes can run at once; writers wait their turn instead of failing with "database is locked"
+  - Several `munus` processes can run at once; processes that write to the database wait their turn instead of failing with "database is locked"
 
-- **Interactive TUI**
+- **Interactive TUI** (text-based user interface: the full-screen view inside the terminal)
   - Edit tasks, cycle their status, and filter by status or tag
   - `?` shows every key binding
   - Optional Vim-style keybindings with `munus --vim`
@@ -41,20 +41,20 @@ It has been a little over two months since v1.0, and six releases since v2.0 (v2
 ## Production hardening
 
 - **Security**
-  - 19 security issues tracked and closed, including owner-only file permissions, terminal escape-sequence sanitizing, and limits on input and import size
-  - Fuzz testing for deadline parsing, terminal output, and import/export
-  - CodeQL, gosec and govulncheck run on every change and weekly
+  - 19 security issues tracked and closed, including owner-only file permissions, terminal escape-sequence sanitizing (removing control codes from text before printing it, so the text can't control the terminal), and limits on input and import size
+  - Fuzz testing (feeding large amounts of random or malformed input to find bugs) for deadline parsing, terminal output, and import/export
+  - CodeQL (GitHub's code scanner), gosec (a security linter for Go), and govulncheck (which checks for known vulnerabilities in the code Munus depends on) run on every change and weekly
 
 - **Testing**
-  - CI runs `go vet`, golangci-lint and the full test suite on Linux, macOS and Windows
+  - Continuous integration (CI), which checks every change automatically, runs `go vet`, golangci-lint (a runner for many Go linters), and the full test suite on Linux, macOS, and Windows
 
 - **Release & Supply Chain**
   - Native binaries for Linux, macOS and Windows on x86-64 and ARM64
   - Linux binaries are fully static, so they do not depend on the system's C library
-  - Every release ships with `checksums.txt` and GitHub build provenance attestations
+  - Every release ships with `checksums.txt`, for checking that a download is intact, and GitHub build provenance attestations (signed records of which repository and workflow built each file)
   - License files are bundled in every archive and in the Docker image
-  - The Docker image runs as an unprivileged user
-  - Dependabot proposes weekly dependency updates
+  - The Docker image runs as an unprivileged (non-root) user
+  - Dependabot (GitHub's automated dependency updater) proposes weekly dependency updates
 
 ## Upgrading from v3.0.0 or older
 
@@ -78,10 +78,10 @@ Then move or delete the old `munus.db` so the note stops. To keep using the old 
 
 Munus is now in production maintenance. Going forward:
 
-- Bug fixes and security patches ship as patch releases
+- Bug fixes and security patches ship as patch releases (releases that change only the last number of the version)
 - Dependencies and the Go toolchain are kept current
 - Stability comes first; new features are not the focus
 
-Found a bug? Please [open an issue](https://github.com/jabbott-iii/Munus/issues). Contributions are welcome, see [CONTRIBUTING.md](https://github.com/jabbott-iii/Munus/blob/main/CONTRIBUTING.md).
+Found a bug? Please [open an issue](https://github.com/jabbott-iii/Munus/issues). Contributions are welcome; see [CONTRIBUTING.md](https://github.com/jabbott-iii/Munus/blob/main/CONTRIBUTING.md).
 
 Thank you for following along!

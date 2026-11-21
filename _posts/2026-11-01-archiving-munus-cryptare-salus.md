@@ -23,13 +23,13 @@ At the same time, three new Rust projects are in development: Tidepool, hardshel
 
 | Project | Final release | What it does |
 |---|---|---|
-| Munus | [v1.0.1](https://github.com/jabbott-iii/Munus/releases/tag/v1.0.1) | Terminal task manager with a TUI and CLI, SQLite storage, tags and relative deadlines |
-| Cryptare | [v1.4.1](https://github.com/jabbott-iii/Cryptare/releases/tag/v1.4.1) | File encryption and compression with AES-256-GCM, Argon2id and a password-protected key store |
+| Munus | [v1.0.1](https://github.com/jabbott-iii/Munus/releases/tag/v1.0.1) | Terminal task manager with a terminal user interface (TUI) and CLI, SQLite storage, tags and relative deadlines |
+| Cryptare | [v1.4.1](https://github.com/jabbott-iii/Cryptare/releases/tag/v1.4.1) | File encryption and compression with AES-256-GCM (encryption that also detects tampering), Argon2id (password hashing), and a password-protected key store |
 | Salus | [v1.2.1](https://github.com/jabbott-iii/Salus/releases/tag/v1.2.1) | Environment health checks for disk, memory, CPU, Docker, Kubernetes, services and certificates, with PASS/WARN/FAIL results |
 
-These last patch releases carry small changes for Capsus and updated documentation. Cryptare v1.4.1 also builds with Go 1.26.9, which carries the Go security fix that its maintenance post said would ship in the next patch release.
+These last patch releases carry small changes for Capsus and updated documentation. Cryptare v1.4.1 also builds with Go 1.26.9, which carries the Go security fix that Cryptare's maintenance post said would ship in the next patch release.
 
-A note on Munus version numbers: older posts here cover Munus v2 and v3. Go requires a module at major version 2 or higher to end its module path in `/v2`, `/v3` and so on, and Munus's path, `github.com/jabbott-iii/Munus`, has no suffix, so those tags caused Go version errors. I removed them and restarted Munus at v1.0.0. Its README calls the old releases pre-1.0.0 builds.
+A note on Munus version numbers: older posts here cover Munus v2 and v3. Go requires a module at major version 2 or higher to end its module path (the name that begins the import path of each of its packages) in `/v2`, `/v3`, and so on. Munus's path, `github.com/jabbott-iii/Munus`, has no suffix, so those tags caused Go version errors. I removed those tags and restarted Munus at v1.0.0. Its README calls the old releases pre-1.0.0 builds.
 
 ## Taking one over
 
@@ -39,30 +39,36 @@ A few practical notes for a fork:
 
 - Use **Fork** on the repository's GitHub page. A fork of an archived repository is an ordinary repository, so you can push to it and publish releases. GitHub leaves Issues off in a new fork, so turn them on in its Settings if you want them.
 - Change the module path in `go.mod` (for example `module github.com/jabbott-iii/Salus`) to your fork's path, and update the import paths that use it.
-- If you release a v2 or later, add the matching `/v2` suffix to the module path. That is the problem that cost Munus its v2 and v3 tags.
-- The CI, security and release workflows are in `.github/workflows/` and come with the fork. Review them before your first release.
+- If you release a v2 or later, add the matching `/v2` suffix to the module path. A missing suffix is the problem that cost Munus its v2 and v3 tags.
+- The continuous integration (CI), security, and release workflows are in `.github/workflows/` and come with the fork. Review them before your first release.
 
-[Capsus](https://github.com/jabbott-iii/Capsus), my toolbox that bundles all three tools into one `capsus` command, keeps its own copy of each as a git subtree, so archiving the repositories does not break it. [Capsus v1.0.0](/intro/2026/11/01/capsus-v1.0.0-release.html), released today, includes the final releases of all three. It is also the last Capsus release: Capsus is now archived too.
+[Capsus](https://github.com/jabbott-iii/Capsus), my toolbox that bundles all three tools into one `capsus` command, keeps its own copy of each as a git subtree (a copy of another repository stored in one of its folders), so archiving the tool repositories does not break it. [Capsus v1.0.0](/intro/2026/11/01/capsus-v1.0.0-release.html), released today, includes the final releases of all three. It is also the last Capsus release: Capsus is now archived too.
 
 ## In development
 
-All three are Rust projects, licensed under Apache-2.0 and designed to use no third-party crates: each one writes the pieces it needs itself.
+All three are Rust projects, licensed under Apache-2.0 and designed to use no third-party crates (Rust packages): each one writes the pieces it needs itself.
 
 ### [Tidepool](https://github.com/jabbott-iii/Tidepool)
 
-Tidepool is an IDE and code editor. It will have a native desktop GUI in the same style as this site, a terminal UI with Vim-style modal editing, first-class Rust and Markdown support, building and signing Android and iOS apps, and AI features through plugged-in coding agents. Outside tools such as rust-analyzer, git, the Android SDK and Xcode are installed and driven by Tidepool through their official channels instead of being bundled.
+Tidepool is an integrated development environment (IDE) and code editor. It will have a native desktop GUI (graphical user interface) in the same style as this site, and a terminal UI with Vim-style modal editing (separate modes for typing text and running commands). It will also have first-class Rust and Markdown support, building and signing Android and iOS apps, and AI features through plugged-in coding agents. Outside tools such as rust-analyzer (which gives editors Rust code completion and error checking), git, the Android SDK (software development kit), and Xcode will be installed and driven by Tidepool through their official channels instead of being bundled.
 
-Work has started. Four of the five foundation tasks in milestone M0 are done: the workspace, a core library, dependency and layering checks, and CI. So are three of the six M1 tasks for the text engine and file formats: a rope with Unicode grapheme handling; selections, transactions and an undo tree; and a JSON and JSONC codec. The roadmap runs from M0 to M14, production hardening and release.
+Work has started. Four of the five foundation tasks in milestone M0 are done: the workspace, a core library, dependency and layering checks, and CI. So are three of the six M1 tasks for the text engine and file formats: a rope with Unicode grapheme handling; selections, transactions and an undo tree; and a JSON and JSONC codec.
+
+A rope is a tree of text chunks that keeps edits fast in large files. Grapheme handling treats what a reader sees as one character (such as é stored as e plus an accent) as one unit. An undo tree keeps every branch of the edit history. JSONC is JSON with comments, and a codec reads and writes a format.
+
+The roadmap runs from M0 to M14, production hardening and release.
 
 ### [hardshellDB](https://github.com/jabbott-iii/hardshellDB)
 
-hardshellDB is an all-in-one SQL database. It is one engine with three ways in: embed it as a Rust library, use it from the `hardshell` shell, or run it as the `hardshelld` server over the PostgreSQL wire protocol, so `psql` and PostgreSQL drivers can connect. Its SQL is PostgreSQL-flavored and strictly typed. A database is a single file of checksummed pages with B+tree tables and indexes and a write-ahead log, and every transaction is serializable.
+hardshellDB is an all-in-one SQL database. It will be one engine with three ways in: embed it as a Rust library, use it from the `hardshell` shell, or run it as the `hardshelld` server over the PostgreSQL wire protocol (PostgreSQL's client-server network protocol), so `psql` and PostgreSQL drivers can connect. Its SQL will be PostgreSQL-flavored and strictly typed.
 
-It is in the planning stage. The design, the decisions behind it and a task-by-task roadmap from M0 to M12 are written, and the storage engine and its crash tests come first, before any SQL.
+A database will be a single file of checksummed pages (blocks with checksums that reveal corruption). Its tables and indexes will be B+trees (sorted, balanced trees that make lookups and range scans fast), and it will have a write-ahead log (changes are logged before they are applied, for crash recovery). Every transaction will be serializable (concurrent transactions behave as if they ran one at a time).
+
+hardshellDB is in the planning stage. The design, the decisions behind it and a task-by-task roadmap from M0 to M12 are written, and the storage engine and its crash tests come first, before any SQL.
 
 ### [softshellDB](https://github.com/jabbott-iii/softshellDB)
 
-softshellDB is an all-in-one embedded NoSQL database: key-value, documents, graph, time-series, full-text search and vector search over one crash-safe storage engine. One transaction can insert a document, update its text and vector indexes, add a graph edge and record a time-series point, all atomically. A network server comes later in the roadmap.
+softshellDB is an all-in-one embedded NoSQL database: key-value, documents, graph, time-series, full-text search and vector search over one crash-safe storage engine. Embedded means it runs inside your program, and NoSQL means it doesn't use SQL's relational tables. Vector search finds the stored vectors (lists of numbers) closest to a query vector. One transaction will be able to insert a document, update its text and vector indexes, add a graph edge, and record a time-series point, all atomically (all or nothing). A network server comes later in the roadmap.
 
 It is in the design phase, with a roadmap from M0 to the first release at M12.
 

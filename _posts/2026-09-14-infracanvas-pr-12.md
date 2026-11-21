@@ -10,9 +10,9 @@ description: "Pull request #12 to InfraCanvas is merged: LXD and Incus container
 
 # [InfraCanvas #12: LXD/Incus terminal exec and lifecycle actions](https://github.com/bytestrix/InfraCanvas/pull/12)
 
-[InfraCanvas](https://github.com/bytestrix/InfraCanvas) draws a live map of your infrastructure (containers, pods, volumes and networks) in the browser. A small agent on each machine reports what it finds, and you get a terminal and one-click actions for what is on the canvas, with no VPN and no inbound ports.
+[InfraCanvas](https://github.com/bytestrix/InfraCanvas) draws a live map of your infrastructure (containers, pods, volumes and networks) in the browser. (A pod is the smallest unit Kubernetes runs: one or more containers that run together.) A small agent on each machine reports what it finds, and you get a terminal and one-click actions for what is on the canvas. It needs no virtual private network (VPN) and no inbound ports (ports opened to accept incoming connections).
 
-My second open source contribution, pull request #12, was merged on September 14. It closes [issue #9](https://github.com/bytestrix/InfraCanvas/issues/9), a good first issue for adding terminal and action support to LXC/LXD/Incus containers.
+My second open source contribution, pull request #12, was merged on September 14. It closes [issue #9](https://github.com/bytestrix/InfraCanvas/issues/9), a "good first issue" (one the maintainers marked as a good starting point for new contributors) for adding terminal and action support to LXC/LXD/Incus containers. LXD and its community fork Incus manage LXC containers, which usually run a full Linux system rather than a single app.
 
 ## The problem
 
@@ -22,12 +22,12 @@ InfraCanvas already discovered LXD and Incus containers and drew them on the can
 
 ### An LXD executor in the agent
 
-The new `pkg/actions/lxd.go` talks to the LXD (or Incus) REST API over its local Unix socket. It finds the socket and builds its HTTP client through the existing discovery code, so discovery and actions always agree on which daemon they are talking to.
+The new `pkg/actions/lxd.go` is an executor: agent code that carries out actions. It talks to the LXD (or Incus) REST API, an HTTP API, over its local Unix socket (a file path that local programs connect to instead of a network port). It finds the socket and builds its HTTP client through the existing discovery code (the code that finds what to draw on the canvas). That way, discovery and actions always agree on which daemon (LXD's or Incus's background service) they are talking to.
 
-- **Lifecycle actions:** start, stop and restart send `PUT /1.0/instances/{name}/state` with a 30-second timeout, then wait on the operation LXD returns, so the result reflects what actually happened. Stop and restart are forced, so a container that ignores the shutdown signal can't hang the action.
-- **Interactive shells:** a terminal session calls `POST /1.0/instances/{name}/exec` with `interactive` and `wait-for-websocket` set, then attaches to the operation's data websocket with the secret LXD hands back.
-- **Resizing:** LXD opens a second, control websocket for each session. The executor keeps it per session and sends `window-resize` messages on it, so the shell reflows when you resize the terminal panel. Closing a session closes its control channel too.
-- **Reusing the existing terminal code:** the data websocket is wrapped in a `net.Conn`, so the agent's existing session handling and output coalescing treat an LXD shell exactly like a Docker one.
+- **Lifecycle actions:** start, stop and restart send `PUT /1.0/instances/{name}/state` with a 30-second timeout. They then wait on the operation LXD returns (LXD makes the change in the background and hands back an operation to track it), so the result reflects what actually happened. Stop and restart are forced, so a container that ignores the shutdown signal can't hang the action.
+- **Interactive shells:** a terminal session calls `POST /1.0/instances/{name}/exec`, LXD's endpoint for running a command inside a container, with `interactive` and `wait-for-websocket` set. It then attaches to the operation's data websocket (a two-way connection that stays open) with the secret LXD hands back.
+- **Resizing:** LXD opens a second, control websocket for each session. The executor keeps it per session and sends `window-resize` messages on it, so the shell picks up the new size when you resize the terminal panel. Closing a session closes its control channel too.
+- **Reusing the existing terminal code:** the data websocket is wrapped in a `net.Conn` (Go's standard interface for a network connection). As a result, the agent's existing session handling and output coalescing (merging small chunks of output before sending them) treat an LXD shell exactly like a Docker one.
 
 ### Wiring it into the agent
 
@@ -38,7 +38,7 @@ The new `pkg/actions/lxd.go` talks to the LXD (or Incus) REST API over its local
 
 ### Runtime-aware routing in the UI
 
-- Container actions and the terminal button now route by `node.metadata.runtime`: Docker containers keep their existing paths, and `lxd` or `incus` containers use the new ones.
+- Container actions and the terminal button now route by `node.metadata.runtime` (the software running the container): Docker containers keep their existing paths, and `lxd` or `incus` containers use the new ones.
 - The terminal panel and websocket manager accept `lxd` as a layer.
 - The Docker-only "update image" action stays scoped to Docker containers.
 - Discovery exposes its LXD client and socket path so the executor can reuse them, and the README's LXD section now lists terminal and lifecycle support.

@@ -10,13 +10,13 @@ description: "Pull request #19 to InfraCanvas is merged: local kubeconfig auto-d
 
 # [InfraCanvas #19: explicit, countable and opt-out local kubeconfig discovery](https://github.com/bytestrix/InfraCanvas/pull/19)
 
-My second pull request to [InfraCanvas](https://github.com/bytestrix/InfraCanvas), the live Docker and Kubernetes infrastructure map, was merged on September 21. It closes [issue #15](https://github.com/bytestrix/InfraCanvas/issues/15) and makes one of the agent's quieter behaviors visible and controllable.
+My second pull request to [InfraCanvas](https://github.com/bytestrix/InfraCanvas), the live Docker and Kubernetes infrastructure map, was merged on September 21. It closes [issue #15](https://github.com/bytestrix/InfraCanvas/issues/15), about how the agent on your machine loads local Kubernetes configuration, and makes one of the agent's quieter behaviors visible and controllable.
 
 ## The problem
 
-When the host agent started, it loaded `~/.kube/config` (or `$KUBECONFIG`) and connected to the contexts it found, without telling you. That is different from the explicit **Clusters → Connect cluster** flow, where you upload a kubeconfig and pick a context yourself.
+When the host agent (the part of InfraCanvas that reports what runs on your machine) started, it loaded `~/.kube/config` (or `$KUBECONFIG`) and connected to the contexts it found, without telling you. That file is the kubeconfig: it tells Kubernetes tools which clusters you can reach and how to log in, and each context in it pairs a cluster with the credentials to use. Loading it silently is different from the explicit **Clusters → Connect cluster** flow, where you upload a kubeconfig and pick a context yourself.
 
-On a developer machine with leftover contexts from other work, such as `kind`, `minikube` or an old project's cluster, a first run of `infracanvas serve` could fill the sidebar with clusters you never chose to connect. There was no notice that it had happened, no record of which contexts were picked up, and no way to turn it off.
+On a developer machine with leftover contexts from other work, a first run of `infracanvas serve` could fill the sidebar with clusters you never chose to connect. Those contexts might come from `kind` or `minikube` (both tools for running Kubernetes locally), or from an old project's cluster. There was no notice that the agent had connected them, no record of which contexts were picked up, and no way to turn this behavior off.
 
 ## What I built
 
@@ -24,11 +24,11 @@ On a developer machine with leftover contexts from other work, such as `kind`, `
 
 The new `ResolveKubeConfig` in `pkg/discovery/kubernetes/resolver.go` is now the single place where the agent decides how to reach Kubernetes:
 
-1. It tries the in-cluster config first, for an agent running inside a cluster.
+1. It tries the in-cluster config first, for an agent running inside a cluster. (Kubernetes normally gives a program running in a cluster credentials for that cluster.)
 2. Only if local discovery is enabled, it loads the local kubeconfig: every file in the `KUBECONFIG` path list, or `~/.kube/config`.
 3. It counts the contexts from the parsed kubeconfig itself, without making any calls to a cluster.
 
-Kubernetes discovery and the Kubernetes action executor each had their own copy of this logic before. Both now call the resolver, which removed the duplicate code and means the opt-out below can't be bypassed through one of them.
+Kubernetes discovery (which finds what is running) and the Kubernetes action executor (which carries out the actions you click) each had their own copy of this logic before. Both now call the resolver, which removed the duplicate code and means the opt-out below can't be bypassed through one of them.
 
 ### An opt-out flag and environment variable
 
@@ -46,7 +46,7 @@ INFRACANVAS_DISCOVER_LOCAL_KUBECONFIG=false infracanvas serve
 
 ### A discovery report in every snapshot
 
-Every snapshot and graph payload now carries a `localKubeconfigAutoDiscovery` object, so the UI and API clients can see exactly what happened:
+Every snapshot (a point-in-time record of the discovered infrastructure) and graph payload now carries a `localKubeconfigAutoDiscovery` object, so the UI and API clients can see exactly what happened:
 
 | Field | Meaning |
 |---|---|
@@ -59,7 +59,7 @@ The object is always present, even when discovery is disabled, so a client can a
 
 ### A one-time notice in the UI
 
-On first load, the dashboard shows a dismissible notice when local contexts were discovered and connected. It only appears for the local host session, and only when discovery ran and found and connected at least one context. Dismissing it is remembered in `localStorage`, so it doesn't come back on refresh or reconnect. There is no notice when discovery is disabled, when only in-cluster config was used, when no contexts were found, or for clusters you uploaded yourself.
+On first load, the dashboard shows a dismissible notice when local contexts were discovered and connected. It only appears for the local host session, and only when discovery ran and found and connected at least one context. Dismissing it is remembered in `localStorage` (the browser's per-site storage), so it doesn't come back on refresh or reconnect. There is no notice when discovery is disabled, when only in-cluster config was used, when no contexts were found, or for clusters you uploaded yourself.
 
 ### Documentation
 
