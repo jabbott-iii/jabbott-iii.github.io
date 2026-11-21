@@ -1404,7 +1404,9 @@ a.pager__link:hover { background: #1a2023; color: var(--teal-hi); }
 }
 
 /* Five header buttons no longer fit beside the brand below about 990px. */
-@media (max-width: 1024px) {
+/* The header row (brand plus six nav buttons) needs about 1,115px; below 1180px it collapses into
+   the menu button, leaving room for a scrollbar. Raise this if a nav button is added. */
+@media (max-width: 1180px) {
   .nav-toggle { display: inline-grid; place-items: center; }
   .site-nav {
     position: absolute; left: 0; right: 0; top: 100%;

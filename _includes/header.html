@@ -46,6 +46,10 @@
           {% include icon.html name="id" %}
           <span>Resume</span>
         </a>
+        <a class="btn btn--amber{% if page.url == '/market/' %} is-current{% endif %}" href="{{ '/market/' | relative_url }}"{% if page.url == '/market/' %} aria-current="page"{% endif %}>
+          {% include icon.html name="market" %}
+          <span>Market</span>
+        </a>
         <a class="btn btn--teal" href="https://github.com/{{ site.social.github }}" rel="me noopener" target="_blank">
           {% include icon.html name="github" %}
           <span>GitHub</span>
