@@ -268,14 +268,46 @@ work into commits, and how to write the message.
   use Jekyll 4-only features or plugins outside that list.
 - `sitemap.xml`, `llms.txt`, and `llms-full.txt` are Liquid templates built from posts, pages, and
   `_data/`. When you add a top-level page, check that `llms.txt` lists it.
+- YAML (`_config.yml`, `_data/*.yml`, and front matter):
+  - Put free-text values in double quotes: summaries, descriptions, titles, and anything else
+    written as a sentence. Unquoted, a colon followed by a space (`IDE: the`) starts a new key
+    and breaks the file. A space followed by `#` starts a comment and silently cuts the value
+    off.
+  - Inside double quotes, escape `"` as `\"` and `\` as `\\`.
+  - Also quote values that must stay text but look like a number or a yes/no value. An unquoted
+    `1.10` becomes the number 1.1, and `yes`, `no`, `on`, and `off` become true or false.
+  - A YAML error in `_config.yml` or `_data/` stops the whole Pages build, so nothing deploys
+    until it is fixed.
 
 ## Before finishing
 
 1. Run `bundle exec jekyll serve` and read the rendered page, not only the source.
-2. Check the page at desktop width and at 375 px, using only the keyboard, and with JavaScript
+2. If you changed `_config.yml`, a file in `_data/`, or any front matter, check that the YAML
+   parses. Jekyll reads YAML with Ruby's parser. Where Ruby isn't installed, use PyYAML, which
+   follows the same YAML version (1.1). This command prints `YAML OK` or the first file that
+   fails, with its line and column:
+
+   ```bash
+   python3 - _config.yml _data/*.yml _posts/*.md *.html *.md *.txt *.xml <<'EOF'
+   import sys, yaml
+   for f in sys.argv[1:]:
+       t = open(f, encoding="utf-8").read()
+       if not f.endswith(".yml"):
+           if not t.startswith("---"):
+               continue
+           t = t.split("\n---", 1)[0]
+       try:
+           yaml.safe_load(t)
+       except yaml.YAMLError as e:
+           sys.exit(f"{f}: {e}")
+   print("YAML OK")
+   EOF
+   ```
+
+3. Check the page at desktop width and at 375 px, using only the keyboard, and with JavaScript
    off if you changed `site.js`.
-3. Check the browser console for errors and the page for broken links.
-4. Proofread changed prose for spelling, names, version numbers, and dates, and confirm every
+4. Check the browser console for errors and the page for broken links.
+5. Proofread changed prose for spelling, names, version numbers, and dates, and confirm every
    claim against its source (release, PR, commit, or ADR).
-5. Do the two-reader check from "Audience and readability": every term is either plain or
+6. Do the two-reader check from "Audience and readability": every term is either plain or
    explained for a student, and nothing is less exact than before for a senior engineer.
