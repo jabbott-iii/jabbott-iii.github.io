@@ -683,8 +683,28 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; }
 .hero__title a:hover { color: var(--teal-hi); }
 .hero__text { margin: 0 0 22px; color: var(--text-2); max-width: 58ch; }
 
-.hero__bars { display: none; justify-content: center; gap: 8px; margin-top: 26px; }
+.hero__controls {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 12px 20px; margin-top: 26px;
+}
+.hero__bars { display: none; justify-content: center; gap: 8px; }
 .js .hero__bars { display: flex; }
+
+.hero__toggle {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 28px; padding: 0 10px;
+  background: none; border: 1px solid var(--line-2);
+  color: var(--text-2);
+  font: 600 11px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.hero__toggle[hidden] { display: none; }
+.hero__toggle:hover { color: var(--teal-hi); border-color: var(--teal); }
+.hero__toggle .icon { display: block; width: 12px; height: 12px; }
+.hero__toggle .hero__toggle-play,
+.hero.is-stopped .hero__toggle-pause { display: none; }
+.hero.is-stopped .hero__toggle-play { display: block; }
 
 .hero__bar {
   display: flex; align-items: center;
@@ -711,7 +731,8 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; }
   transform: scaleX(0);
   animation: bar-fill 8s linear forwards;
 }
-.hero.is-paused .hero__bar.is-active span::after { animation-play-state: paused; }
+.hero.is-paused .hero__bar.is-active span::after,
+.hero.is-stopped .hero__bar.is-active span::after { animation-play-state: paused; }
 
 @keyframes bar-fill {
   to { transform: scaleX(1); }

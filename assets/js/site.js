@@ -231,6 +231,20 @@
       hero.addEventListener('mouseleave', resume);
       hero.addEventListener('focusin', pause);
       hero.addEventListener('focusout', resume);
+
+      // Hovering or focusing pauses rotation only for as long as it lasts. The toggle stops it
+      // until the user presses it again, for touch and screen reader users too (WCAG 2.2.2).
+      const toggle = hero.querySelector('[data-carousel-toggle]');
+      const toggleText = hero.querySelector('[data-carousel-toggle-text]');
+      if (toggle && toggleText) {
+        toggle.hidden = false;
+        toggle.addEventListener('click', () => {
+          const stop = !hero.classList.contains('is-stopped');
+          hero.classList.toggle('is-stopped', stop);
+          if (!stop) hero.classList.remove('is-paused');
+          toggleText.textContent = stop ? 'Play' : 'Pause';
+        });
+      }
     }
   }
 

@@ -37,10 +37,17 @@ body_class: log
       </div>
     </article>
     {%- endfor %}
-    <div class="hero__bars" role="tablist" aria-label="Choose a featured post">
-      {%- for post in site.posts limit: 4 %}
-      <button class="hero__bar{% if forloop.first %} is-active{% endif %}" type="button" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="hero-slide-{{ forloop.index }}" aria-label="{{ post.title | escape }}"><span></span></button>
-      {%- endfor %}
+    <div class="hero__controls">
+      <div class="hero__bars" role="tablist" aria-label="Choose a featured post">
+        {%- for post in site.posts limit: 4 %}
+        <button class="hero__bar{% if forloop.first %} is-active{% endif %}" type="button" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="hero-slide-{{ forloop.index }}" aria-label="{{ post.title | escape }}"><span></span></button>
+        {%- endfor %}
+      </div>
+      <button class="hero__toggle" type="button" data-carousel-toggle hidden>
+        {%- include icon.html name="pause" class="hero__toggle-pause" -%}
+        {%- include icon.html name="play" class="hero__toggle-play" -%}
+        <span data-carousel-toggle-text>Pause</span><span class="sr-only"> featured posts</span>
+      </button>
     </div>
   </section>
 
