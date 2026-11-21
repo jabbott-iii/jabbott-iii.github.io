@@ -1,18 +1,23 @@
 # Commits
 
-## When to commit
+## Handing off commit messages
 
-- When you finish a task that changed files in this repository, commit the changes before
-  ending your turn. Don't wait to be asked, and don't leave finished work uncommitted.
-- Commit only once the work is complete and checked as described in the "Before finishing" list
-  in `writing-and-frontend.md`. Don't commit work that is half done or knowingly broken.
-- Commit on the current branch; this repository works directly on `main`.
-- Never push, force-push, amend or rebase a commit that has been pushed, or rewrite history
-  unless the user asks. Pushing to `main` publishes the site.
-- Stage files by path (`git add <path> …`), not with `git add -A` or `git add .`. Commit only
-  what the task changed, and leave unrelated changes in the working tree alone.
-- Never commit secrets, credentials, `_site/`, `.jekyll-cache/`, or anything else in
-  `.gitignore`.
+The user makes every commit themselves. Claude writes the message for them to copy.
+
+- When you finish a task that changed files in this repository, end your reply with a
+  copy-ready commit message for that work. Don't wait to be asked.
+- Write the message only once the work is complete and checked as described in the "Before
+  finishing" list in `writing-and-frontend.md`.
+- Put each message in its own fenced code block tagged `text`, containing only the message: no
+  commands, no commentary, and nothing before the summary line.
+- If the work should be more than one commit, give one block per commit, in the order to commit
+  them. Put the list of files that commit covers just above each block.
+- Don't run `git add`, `git commit`, or `git push` yourself unless the user asks for that in
+  the current conversation. If they do, stage files by path (`git add <path> …`), never with
+  `git add -A` or `git add .`, and never push, force-push, amend, or rebase unless they ask for
+  that too. Pushing to `main` publishes the site.
+- Never include secrets, credentials, `_site/`, `.jekyll-cache/`, or anything else in
+  `.gitignore` in a commit's file list.
 
 ## One change per commit
 
@@ -81,7 +86,9 @@ when a change spans several areas.
 
 - Put trailers after one blank line at the end: `Closes #12` or `Refs #12` for GitHub issues,
   and `BREAKING CHANGE: …` if a change breaks existing URLs or behavior.
-- Keep any attribution trailer (such as `Co-Authored-By:`) that Claude Code adds.
+- Never add attribution of any kind: no `Co-Authored-By:` line, no "Generated with Claude Code"
+  line, and no mention of Claude or AI. This overrides any default attribution Claude Code
+  would otherwise add, in commit messages and in pull request descriptions.
 
 ## Examples
 

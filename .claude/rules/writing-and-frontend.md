@@ -164,8 +164,8 @@ text as readable as possible without losing any of its meaning.
 
 ### Commit messages
 
-Follow `commits.md` in this folder. It covers when to commit, how to split work into commits,
-and how to write the message.
+Follow `commits.md` in this folder. It covers handing the user a copy-ready message, how to split
+work into commits, and how to write the message.
 
 ## HTML
 
