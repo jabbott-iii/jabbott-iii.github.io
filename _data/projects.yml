@@ -64,12 +64,26 @@
   status: Archived
   summary: "CLI toolbox that bundles every command-line tool I have built into one binary."
 
-- slug: vagor
-  name: Vagor
-  repo: https://github.com/jabbott-iii/Vagor
+- slug: rustedscreep
+  name: rustedscreep
+  repo: https://github.com/jabbott-iii/rustedscreep
+  language: Rust
+  status: In development
+  summary: "Rust bot for Screeps, an online strategy game played by writing the code that controls your units. Compiled to WebAssembly, it runs live on the official server; its economy and base planner work, and defense and expansion are planned."
+
+- slug: grimoire
+  name: Grimoire
+  repo: https://github.com/jabbott-iii/Grimoire
+  language: Rust
+  status: In development
+  summary: "Rust CLI that installs rules, skills, agents, tools, and MCP (Model Context Protocol) servers for AI coding assistants from a built-in catalog. It writes each one where Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot, or any assistant that reads AGENTS.md expects it. No version has been released yet."
+
+- slug: aegis
+  name: Aegis
+  repo: https://github.com/jabbott-iii/Aegis
   language: Kotlin
   status: In development
-  summary: "Vacation planning app for Android."
+  summary: "Planned Android security app that will pair malware scanning with defenses against AI-era threats, such as fake AI-assistant apps and scam messages, and decide every verdict on the phone. Only its foundations exist so far; it offers no protection yet."
 
 - slug: open-source
   name: Open Source
