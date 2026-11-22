@@ -3,11 +3,17 @@
 # structured data, and (when served from this domain) a sitemap entry.
 # The Deployments menu also asks the GitHub API for Pages-enabled repos at runtime and adds any
 # that are missing here, so a new deployment shows up before this file is updated.
+# `pages` lists a deployment's other pages that readers may look for on their own. Each one gets
+# a link under its deployment in llms.txt and (when served from this domain) a sitemap entry.
 - name: Nadir
   repo: jabbott-iii/Nadir
   url: https://jabbott.dev/Nadir/
   language: Rust
-  summary: "Project documentation for Nadir, a high-performance Rust game engine and rendering framework."
+  summary: "The demo page for Nadir, a top-down 2D game engine in Rust with no third-party crates. It plays the sandbox game as continuous integration (CI) recorded it from the latest passing build, lists every feature's progress, and links to a developer's guide."
+  pages:
+    - name: Instructions
+      url: https://jabbott.dev/Nadir/instructions/
+      summary: "A developer's guide to building a top-down 2D game with Nadir: setting up a project, the game loop, assets, drawing, collision, sound, the development tools, testing, and shipping. Its Rust examples are files in the engine's repository that its tests compile."
 
 - name: Tidepool
   repo: jabbott-iii/Tidepool

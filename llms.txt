@@ -62,6 +62,9 @@ Apps released to the public:
 Sites built from these repositories and served live:
 {% for d in site.data.deployments %}
 - [{{ d.name }}]({{ d.url }}): {{ d.summary }} Source: https://github.com/{{ d.repo }}
+{%- for dp in d.pages %}
+  - [{{ dp.name }}]({{ dp.url }}): {{ dp.summary }}
+{%- endfor %}
 {%- endfor %}
 
 ## Engineering log

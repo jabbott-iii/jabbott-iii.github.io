@@ -96,7 +96,9 @@ the full text of every post.
 
 Project sites GitHub Pages serves under this domain (`https://jabbott.dev/<Repo>/`) share this
 site's `robots.txt` and `sitemap.xml`, so listing them in `_data/deployments.yml` is enough for
-crawlers to find them. Each project site's own pages still need their own head tags. Paste this
+crawlers to find them. List a project site's other pages that readers may look for on their own,
+such as Nadir's instructions, under its entry's `pages`: each gets a sitemap entry and a link in
+`llms.txt`. Each project site's own pages still need their own head tags. Paste this
 into the project site's `<head>` and fill in the placeholders:
 
 ```html
