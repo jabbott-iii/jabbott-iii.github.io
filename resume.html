@@ -56,6 +56,9 @@ body_class: resume
               <h3 class="entry__role">{{ e.role }}</h3>
               <p class="entry__org">{{ e.org }}{% if e.type %} <span class="entry__type">· {{ e.type }}</span>{% endif %}</p>
               <p class="entry__meta">{{ e.period }} · {{ e.location }}</p>
+              {%- if e.description %}
+              <p class="entry__text">{{ e.description }}</p>
+              {%- endif %}
               {%- if e.highlights %}
               <ul class="entry__list">
                 {%- for h in e.highlights %}
@@ -74,7 +77,9 @@ body_class: resume
           <div class="project-block">
             <h3 class="entry__role">{{ pr.name }}</h3>
             <p class="entry__meta">{{ pr.period }}</p>
+            {%- if pr.summary %}
             <p class="entry__text">{{ pr.summary }}</p>
+            {%- endif %}
             {%- if pr.items %}
             <ul class="project-list">
               {%- for slug in pr.items %}

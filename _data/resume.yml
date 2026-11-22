@@ -1,7 +1,7 @@
-# Resume data, copied from https://www.linkedin.com/in/josephabbottiii/ (signed-in view) on 2026-10-31.
+# Resume data, copied from https://www.linkedin.com/in/josephabbottiii/ (signed-in view) on 2026-11-22.
 # Wording is LinkedIn's; only separators were changed for display.
 source: https://www.linkedin.com/in/josephabbottiii/
-synced: 2026-10-31
+synced: 2026-11-22
 
 name: "Joseph Abbott III"
 headline: "Software Engineer · AWS Certified · Open Source Contributor · DevOps · AI Engineering · Experienced with government cybersecurity frameworks and policy."
@@ -14,12 +14,12 @@ clearance: "Active DoD Secret Clearance"
 # First paragraph of the About section; also used as the description in structured data.
 summary: >-
   Marine veteran and Senior Field Engineer who keeps mission-critical training systems secure and
-  running, now bringing that operational discipline to DevOps, DevSecOps, and cloud engineering.
+  running, now bringing that operational discipline to DevOps, Software Engineering, and Platform
+  Engineering.
 
 about:
-  - "Marine veteran and Senior Field Engineer who keeps mission-critical training systems secure and running, now bringing that operational discipline to DevOps, DevSecOps, and cloud engineering."
-  - "Since 2022, I’ve supported F-35 flight simulators for Lockheed Martin. I manage Linux servers, virtual machines, and Active Directory in environments where downtime and security gaps aren’t an option. Before that, I provided Tier 1 support on the NGEN contract. I also spent five years in the U.S. Marine Corps as a field radio operator, keeping communications up when it mattered."
-  - "I have graduated with a B.S. in Software Engineering at Western Governors University and write code in Go, Python, Java/Kotlin, and SQL. I’m also building infrastructure-as-code skills and preparing for the HashiCorp Terraform Associate certification."
+  - "Marine veteran and Senior Field Engineer who keeps mission-critical training systems secure and running, now bringing that operational discipline to DevOps, Software Engineering, and Platform Engineering."
+  - "On my own time, I build software, publish it on GitHub, and write about it in my engineering log at jabbott.dev. Since July 2026, I have released four command-line tools in Go, including Cryptare, a file encryption tool with signed releases. I have also published Denarii Dolor on Google Play: an Android app, written in Kotlin, that keeps personal finance records encrypted on the phone. I have had five pull requests merged into three open-source projects. I am now writing Rust projects with no third-party libraries, such as the 2D game engine Nadir and the SQL database hardshellDB."
   - "Clearance: Secret"
   - "I’m relocating to Boise, Idaho, and I’m open to DevOps, DevSecOps, Cloud, and Software Engineering roles in Boise or remote. Let’s connect."
 
@@ -52,13 +52,7 @@ experience:
     type: "Full-time"
     period: "Feb 2022 – Aug 2022"
     location: "Luke AFB · On-site"
-    highlights:
-      - "Installed security updates on 300 machines to harden them against threats."
-      - "Installed all new hardware and software on 300 machines, 12 F-35 cockpits, and 300 projectors. Enabling the training of 50+ F-35 pilots a day."
-      - "Maintain, deploy, and repair 24 SuSE file servers and 48 RHEL virtual machines."
-      - "Managed all user access for 68+ users on 16 isolated intranets with active directory."
-      - "Preflight and launch flight simulations, completing up to 84 simulated missions per day."
-      - "Utilized ALIS for all equipment change management and maintenance, to successfully replace or fix $21.5M+ in hardware."
+    description: "Subcontracted for the same position as with Lockheed Martin."
 
   - role: "Tier 1 Agent"
     org: "Leidos"
@@ -73,8 +67,7 @@ experience:
     type: "Full-time"
     period: "Apr 2020 – May 2021"
     location: "Meridian, Idaho, United States · On-site"
-    highlights:
-      - "Handled over 4,000 service tickets ensuring every customer issue is handled appropriately. Ensuring as a team that contract metrics were met."
+    description: "Subcontracted for the same position as with Leidos."
 
   - role: "Field Radio Operator, Sergeant / E5"
     org: "United States Marine Corps"
@@ -96,6 +89,9 @@ education:
       - "Excellence Award in Back-End Programming"
 
 certifications:
+  - name: "Bachelor of Science, Software Engineering"
+    issuer: "Western Governors University"
+    issued: "Oct 2026"
   - name: "AWS Certified Cloud Practitioner"
     issuer: "Amazon Web Services (AWS)"
     issued: "Aug 2026"
@@ -113,7 +109,14 @@ certifications:
     issued: "Aug 2020"
     expires: "Aug 2029"
 
+# Projects in LinkedIn's order. `items` lists the projects.yml slugs of the media attached to each one.
 projects:
+  - name: "Artificial Intelligence and Bots"
+    period: "Oct 2026 – Present"
+    items: [rustedscreep, grimoire]
+  - name: "Game Development"
+    period: "Sep 2026 – Present"
+    items: [nadir]
   - name: "Open Source Project Contributions"
     period: "Sep 2026 – Present"
     summary: "Merged Pull Requests of contributions made to other projects."
@@ -130,10 +133,9 @@ projects:
           - { n: 12, url: "https://github.com/bytestrix/InfraCanvas/pull/12" }
           - { n: 19, url: "https://github.com/bytestrix/InfraCanvas/pull/19" }
           - { n: 21, url: "https://github.com/bytestrix/InfraCanvas/pull/21" }
-  - name: "CLI and TUI Projects"
-    period: "Jul 2026 – Present"
-    summary: "Command line interface applications and terminal user interface applications."
-    items: [munus, cryptare, salus, capsus]
+  - name: "Mobile Applications"
+    period: "Jun 2026 – Present"
+    items: [denarii-dolor]
 
 volunteer:
   - role: "Volunteer"
@@ -154,6 +156,7 @@ top_skills:
 skills:
   - group: "Industry Knowledge"
     items:
+      - "Game Development"
       - "Software Engineers"
       - "Large Language Models (LLM)"
       - "Artificial Intelligence (AI)"
