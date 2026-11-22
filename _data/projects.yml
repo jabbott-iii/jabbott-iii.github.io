@@ -34,7 +34,7 @@
   repo: https://github.com/jabbott-iii/Nadir
   language: Rust
   status: In development
-  summary: "Rust game engine and rendering framework with an ECS, cross-platform platform and FFI layers, asset pipelines and a deterministic runtime."
+  summary: "Engine for top-down 2D desktop games, built with no third-party crates: its own OS bindings, OpenGL renderer, entity component system (ECS), collision, audio mixer, asset pipeline, and build tools. Its fixed 60 Hz simulation is deterministic: the same seed and inputs replay to the same game state on the same build."
 
 - slug: tidepool
   name: Tidepool
