@@ -78,8 +78,10 @@ goes up by one.
 ## Resume
 
 `_data/resume.yml` holds the resume, copied word for word from the signed-in view of the LinkedIn
-profile. When LinkedIn changes, update the matching entries and the `synced` date. The
-`clearance` field and the matching About line and skill appear on the public page and in
+profile. When LinkedIn changes, update the matching entries and the `synced` date. Leave out the
+"Bachelor of Science, Software Engineering" entry under LinkedIn's licenses and certifications:
+the degree is already under education, and LinkedIn lists it there only to host its verification
+link. The `clearance` field and the matching About line and skill appear on the public page and in
 `llms.txt`; delete them there if the clearance should not be public.
 
 ## SEO and GEO

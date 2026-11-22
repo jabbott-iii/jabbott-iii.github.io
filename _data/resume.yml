@@ -1,5 +1,6 @@
 # Resume data, copied from https://www.linkedin.com/in/josephabbottiii/ (signed-in view) on 2026-11-22.
-# Wording is LinkedIn's; only separators were changed for display.
+# Wording is LinkedIn's; only separators were changed for display. One LinkedIn entry is left out
+# on purpose: see the note above `certifications`.
 source: https://www.linkedin.com/in/josephabbottiii/
 synced: 2026-11-22
 
@@ -88,10 +89,10 @@ education:
     awards:
       - "Excellence Award in Back-End Programming"
 
+# Leave out LinkedIn's "Bachelor of Science, Software Engineering" entry when syncing. The degree is
+# already under education; it is listed under certifications on LinkedIn only to host its
+# verification link.
 certifications:
-  - name: "Bachelor of Science, Software Engineering"
-    issuer: "Western Governors University"
-    issued: "Oct 2026"
   - name: "AWS Certified Cloud Practitioner"
     issuer: "Amazon Web Services (AWS)"
     issued: "Aug 2026"
