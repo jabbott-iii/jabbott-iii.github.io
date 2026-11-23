@@ -223,6 +223,90 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; }
 .nav-toggle[aria-expanded="true"] .nav-toggle__bars::before { top: 0; width: 22px; transform: rotate(45deg); }
 .nav-toggle[aria-expanded="true"] .nav-toggle__bars::after { top: 0; transform: rotate(-45deg); }
 
+/* ---------- Header: navigation tiles ---------- */
+
+/* Small versions of the home page's destination tiles (.portal): a glass panel with an accent
+   glow, corner brackets, and a hexagon icon frame, in the same accent as the matching tile.
+   Each bracket is two 1px lines (one on the link, one on .nav-tile__fx), so hover can lengthen
+   them with scaleX() and scaleY() without thickening the line, and only transform animates. */
+.nav-tile {
+  --accent: var(--teal);
+  --arm: 16px;
+  --reach: 0.5;
+  position: relative;
+  display: inline-flex; align-items: center; gap: 10px;
+  height: 40px; padding: 0 16px 0 8px;
+  font: 600 13px/1 var(--font);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text);
+  background:
+    radial-gradient(90% 160% at 100% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%),
+    var(--panel);
+  border: 1px solid var(--line-2);
+  transition: transform 0.2s ease;
+}
+.nav-tile--neutral { --accent: var(--text-2); }
+.nav-tile--resume { --accent: var(--amber); }
+.nav-tile--deploy { --accent: var(--green); }
+.nav-tile--market { --accent: var(--violet); }
+
+.nav-tile::before,
+.nav-tile::after,
+.nav-tile__fx::before,
+.nav-tile__fx::after {
+  content: "";
+  position: absolute;
+  background: var(--accent);
+  transition: transform 0.25s ease;
+}
+.nav-tile::before,
+.nav-tile::after { width: var(--arm); height: 1px; transform: scaleX(var(--reach)); }
+.nav-tile::before { top: -1px; left: -1px; transform-origin: left; }
+.nav-tile::after { bottom: -1px; right: -1px; transform-origin: right; }
+.nav-tile__fx { position: absolute; inset: -1px; pointer-events: none; }
+.nav-tile__fx::before,
+.nav-tile__fx::after { width: 1px; height: var(--arm); transform: scaleY(var(--reach)); }
+.nav-tile__fx::before { top: 0; left: 0; transform-origin: top; }
+.nav-tile__fx::after { bottom: 0; right: 0; transform-origin: bottom; }
+
+.nav-tile__icon {
+  position: relative;
+  display: grid; place-items: center;
+  width: 24px; height: 26px; flex: none;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 55%, transparent);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+.nav-tile__icon::before {
+  content: "";
+  position: absolute; inset: 1px;
+  background: var(--panel-solid);
+  clip-path: inherit;
+}
+.nav-tile__icon .icon { position: relative; width: 14px; height: 14px; }
+
+/* Hover, keyboard focus, the current page, and the open Deployments menu all extend the
+   brackets and tint the border and label. */
+.nav-tile:hover,
+.nav-tile:focus-visible,
+.nav-tile.is-current,
+.nav-tile[aria-expanded="true"] {
+  --reach: 1;
+  color: color-mix(in srgb, var(--accent) 55%, #fff);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+}
+.nav-tile:hover,
+.nav-tile:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45), 0 0 20px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+.nav-tile:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* The current page also fills its hexagon, so the state doesn't depend on color alone. */
+.nav-tile.is-current .nav-tile__icon { color: var(--bg); background: var(--accent); }
+.nav-tile.is-current .nav-tile__icon::before { opacity: 0; }
+
 /* ---------- Buttons ---------- */
 
 .btn {
@@ -243,8 +327,7 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; }
 }
 .btn:hover { color: var(--btn-fg); }
 
-.btn--ghost:hover,
-.btn--ghost.is-current {
+.btn--ghost:hover {
   --btn-line: var(--teal);
   --btn-fg: var(--teal-hi);
   box-shadow: inset 0 0 18px rgba(92, 203, 203, 0.12);
@@ -267,8 +350,7 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; }
   --btn-line: var(--amber);
   clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
 }
-.btn--amber:hover,
-.btn--amber.is-current {
+.btn--amber:hover {
   --btn-bg: var(--amber-hi);
   --btn-line: var(--amber-hi);
   --btn-fg: #000;
@@ -958,7 +1040,6 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; }
 
 .deploy { position: relative; }
 .deploy__chevron { transition: transform 0.2s ease; }
-.deploy__toggle[aria-expanded="true"] { --btn-line: var(--teal); --btn-fg: var(--teal-hi); }
 .deploy__toggle[aria-expanded="true"] .deploy__chevron { transform: rotate(180deg); }
 
 .deploy__panel {
@@ -1403,9 +1484,8 @@ a.pager__link:hover { background: #1a2023; color: var(--teal-hi); }
   .sidebar { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
 }
 
-/* Five header buttons no longer fit beside the brand below about 990px. */
-/* The header row (brand plus six nav buttons) needs about 1,115px; below 1180px it collapses into
-   the menu button, leaving room for a scrollbar. Raise this if a nav button is added. */
+/* The header row (brand plus six nav tiles) needs about 1,085px; below 1180px it collapses into
+   the menu button, leaving room for a scrollbar. Raise this if a nav tile is added. */
 @media (max-width: 1180px) {
   .nav-toggle { display: inline-grid; place-items: center; }
   .site-nav {
@@ -1418,7 +1498,7 @@ a.pager__link:hover { background: #1a2023; color: var(--teal-hi); }
     box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6);
   }
   .site-nav.is-open { display: flex; }
-  .site-nav .btn { width: 100%; justify-content: flex-start; height: 46px; }
+  .nav-tile { width: 100%; height: 48px; }
   .deploy__toggle .deploy__chevron { margin-left: auto; }
   .deploy__panel { position: static; width: auto; margin-top: 10px; box-shadow: none; }
 }
