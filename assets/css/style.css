@@ -22,6 +22,10 @@
   --green: #3ddc97;
   --rust: #f09a4a;
   --violet: #a58cff;
+  --bronze: #cd7f32;
+  --bronze-hi: #ffc98f;
+  --purple: #9a6bff;
+  --purple-hi: #e3d6ff;
   --font: "Saira", "Segoe UI", system-ui, -apple-system, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --max: 1280px;
@@ -99,23 +103,10 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; }
   position: fixed; inset: 0; z-index: -1;
   overflow: hidden; pointer-events: none;
   background:
-    radial-gradient(1100px 620px at 85% -10%, rgba(92, 203, 203, 0.12), transparent 62%),
-    radial-gradient(900px 520px at -8% 22%, rgba(242, 194, 0, 0.05), transparent 60%),
+    radial-gradient(800px 900px at 104% 35%, color-mix(in srgb, var(--purple) 10%, transparent), transparent 62%),
+    radial-gradient(800px 900px at -4% 60%, color-mix(in srgb, var(--bronze) 8%, transparent), transparent 62%),
     radial-gradient(1400px 900px at 50% 125%, rgba(38, 70, 82, 0.4), transparent 62%),
     var(--bg);
-}
-
-.space__planet {
-  position: absolute;
-  width: 1800px; height: 1800px;
-  right: -620px; top: -1580px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% 100%, #182a30 0%, #0d1214 38%, transparent 62%);
-  box-shadow:
-    0 0 0 1px rgba(143, 229, 229, 0.18),
-    0 40px 140px rgba(92, 203, 203, 0.18),
-    inset 0 -18px 60px rgba(92, 203, 203, 0.12);
-  opacity: 0.9;
 }
 
 .space__stars {
@@ -152,6 +143,46 @@ h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; }
 @keyframes drift {
   to { transform: translate3d(-300px, -260px, 0); }
 }
+
+/* Bronze circuit traces on the left edge and purple nerve cells (synapses) on the right, drawn
+   in _includes/backdrop.html. Each drawing is as tall as the window and 2:5 wide, capped at 40%
+   of the window's width, and fades out toward the content in the middle. */
+.space__art {
+  --art: var(--bronze);
+  --art-hi: var(--bronze-hi);
+  position: absolute; top: 0;
+  width: auto; height: 100%;
+  aspect-ratio: 2 / 5;
+  max-width: 40vw;
+}
+.space__art--circuits {
+  left: 0;
+  -webkit-mask-image: linear-gradient(90deg, #000 40%, transparent);
+          mask-image: linear-gradient(90deg, #000 40%, transparent);
+}
+.space__art--synapses {
+  --art: var(--purple);
+  --art-hi: var(--purple-hi);
+  right: 0;
+  -webkit-mask-image: linear-gradient(270deg, #000 40%, transparent);
+          mask-image: linear-gradient(270deg, #000 40%, transparent);
+}
+
+/* These opacities keep --text-2 body text at 4.5:1 or better where a line or cell sits behind it.
+   Resting cells stay dim; they flare only while a pulse passes through. */
+.space__traces { fill: none; stroke: var(--art); stroke-width: 2; stroke-opacity: 0.34; stroke-linejoin: round; }
+.space__pads { fill: none; stroke: var(--art); stroke-width: 2; stroke-opacity: 0.42; }
+.space__chip { fill: color-mix(in srgb, var(--art) 6%, transparent); stroke: var(--art); stroke-width: 1.5; stroke-opacity: 0.4; }
+.space__axons { fill: none; stroke: var(--art); stroke-width: 1.2; stroke-opacity: 0.38; }
+.space__dendrites { fill: none; stroke: var(--art); stroke-width: 1; stroke-opacity: 0.24; stroke-linecap: round; }
+.space__somas { fill: var(--art); fill-opacity: 0.45; }
+.space__flash { fill: none; stroke: var(--art-hi); stroke-width: 2; stroke-linejoin: round; }
+
+/* Gradients for the sparks (a white-hot core) and for the glow where a pulse lands. */
+.space__stop--core { stop-color: color-mix(in srgb, var(--art-hi) 35%, #fff); }
+.space__stop--hi { stop-color: var(--art-hi); }
+.space__stop--glow { stop-color: var(--art); stop-opacity: 0.55; }
+.space__stop--clear { stop-color: var(--art); stop-opacity: 0; }
 
 /* ---------- Header ---------- */
 
@@ -1514,6 +1545,8 @@ a.pager__link:hover { background: #1a2023; color: var(--teal-hi); }
 
 @media (max-width: 640px) {
   :root { --header-h: 60px; }
+  /* On phones the drawings sit behind most of the text, so dim them further. */
+  .space__art { opacity: 0.7; }
   .brand__mark { width: 32px; height: 32px; }
   .brand__name { font-size: 16px; letter-spacing: 0.22em; }
   .brand__sub { letter-spacing: 0.42em; }
@@ -1544,6 +1577,7 @@ a.pager__link:hover { background: #1a2023; color: var(--teal-hi); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   .space__stars { animation: none; }
+  .space__pulses { display: none; }
 }
 
 /* ---------- Print (resume) ---------- */

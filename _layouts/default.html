@@ -15,12 +15,7 @@
   <script src="{{ '/assets/js/site.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
 </head>
 <body class="page--{{ page.body_class | default: page.layout | default: 'page' }}">
-  <div class="space" aria-hidden="true">
-    <div class="space__planet"></div>
-    <div class="space__stars"></div>
-    <div class="space__stars space__stars--far"></div>
-    <div class="space__grid"></div>
-  </div>
+{% include backdrop.html %}
 {% include header.html %}
   <main id="main" class="site-main">
 {{ content }}
